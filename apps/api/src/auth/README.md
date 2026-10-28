@@ -1,3 +1,3 @@
-# auth
+Phase 2 implementation.
 
-Reserved module boundary from the approved architecture. No feature is implemented here in Phase 1; implementation requires authorization for its owning phase.
+Authentication, rotating session families, reset tokens, CSRF and throttling. HTTP controllers use validated DTOs; refresh/reset/revoke serialize on the user row.

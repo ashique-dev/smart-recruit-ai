@@ -2,7 +2,7 @@
 
 ## Current authorization and status
 
-**Independent Phase 1 audit: FAIL (19/20 checks passed). F01–F04 are locally remediated and verified; independent re-evaluation is pending. Phase 2 remains unstarted and unauthorized.** The owner reports that Phase 0 passed independent verification. Historical audit/remediation entries below are preserved as historical evidence; this implementation does not invent a separate audit artifact. Branch: `phase-1/infrastructure`; starting commit: `01ace0a53a8a0c54649b65072d3f82976c9135cf`. No commit or push is authorized.
+**Independent Phase 2 audit: FAIL (27 passed, 2 failed, 1 insufficiently verified of 30). Audit remediation is locally complete: F01–F04 FIXED, F05 UNRESOLVED; independent re-audit pending. Prior developer PASS is superseded.** The owner reports independent Phase 0 and Phase 1 PASS in the current implementation request. Historical audit evidence below is preserved. Branch `phase-2/auth-multitenancy`, baseline `e830a84645f3bfe4a7535d2f023a426d39459c99`, initially clean. No commit/push authorized.
 
 ## Historical initial delivery status (superseded by independent audit)
 
@@ -111,3 +111,42 @@ Executed and passed: frozen install, lint, typecheck, build, `pnpm test` (Vitest
 Full command results, original failure history, assertion-preservation mapping and changed paths are in [phase-1-verification.md](phase-1-verification.md). Remaining risks: four moderate MinIO-chain npm advisories, upstream MinIO maintenance, and unexecuted later-phase production/auth/tenant/privacy gates. No required remediation validation was omitted. Stop here for independent re-evaluation; no independent PASS, commit, push or Phase 2 authorization is claimed.
 
 Final restored-state verification: normal runtime images restored; eight running services healthy and initializer exited/0, only loopback port 8080 published. Restored-stack browser test passed. Lint, 18 Vitest tests and the 11 real-service checks passed again after tightening heartbeat recovery to require advancement beyond both baselines. Independent re-evaluation remains pending.
+
+
+## Phase 2 checkpoint 2A — 2026-10-28
+
+Implemented the approved identity, company/membership/invitation, audit and tenant/global notification foundation schema and explicit migration. Prisma validation/generation, API image build, owner-only migration deployment, lint and isolated real-PostgreSQL negative constraint/permission tests passed. Initial Prisma relation uniqueness and migration-diff invocation errors were corrected. Required schema tests passed before proceeding to authentication. Full coverage, decisions and actual commands are in [phase-2-verification.md](phase-2-verification.md). Phase 2 remains incomplete; no independent approval or Phase 3 work.
+
+## Phase 2 checkpoint 2B — 2026-10-28
+
+Authentication/session/reset implementation and required HTTP/PostgreSQL race tests passed. Tests verify rotation/replay with committed family revocation, reset one-time/expiry/session invalidation, CSRF/origin, cookies, disabled accounts and account/IP limits. Three security unit tests and workspace build/lint passed; initial strict-type build errors were repaired. Reset delivery intent is durable; SMTP execution remains Checkpoint 2D. Details in the Phase 2 verification record. Proceeding to 2C; Phase 2 remains incomplete.
+
+## Phase 2 checkpoint 2C — 2026-10-28
+
+Company-scoped authorization, workspace creation/selection APIs, admin settings/team role controls, revision checks and last-admin locking implemented. Real HTTP multi-company/role/removal/guessed-ID tests and concurrent last-admin test passed; isolated PostgreSQL constraints passed again. Workspace build/lint and API image build passed. Scope remains Phase 2 only; proceeding to invitations and durable email.
+
+## Phase 2 checkpoint 2D backend — 2026-10-28
+
+Team invitations and independent durable email worker implemented; combined HTTP/PostgreSQL/Mailpit/Redis security/recovery tests passed. Includes explicit queue loss and separate-process SIGKILL/recovery. Invitation and reset payloads are encrypted/versioned and purged on terminal states; external SMTP remains at-least-once. Frontend forms/workspace/team/session controls implemented and build passes. Browser and final project gates are still pending; no Phase 2 PASS claimed yet.
+
+
+## Phase 2 final developer verification — 2026-10-28
+
+Checkpoints 2A–2D and required React workflows are implemented and locally verified. Final frozen install, lint, typecheck/build, Prisma validation/generation/migration deployment/status, base/dev Compose config, API/worker/web images and full service health passed. Default Vitest: 21 passed with two service cases explicitly skipped; `pnpm test:phase2`: five passed (three overlapping unit cases plus both real-service cases), giving 23 distinct cases. All 11 infrastructure checks passed. Isolated Phase 2 Playwright and original infrastructure browser smoke passed. Two-tab refresh, session-revoke UI, Mailpit acceptance/reset and API restart while worker stopped are verified. The first browser restart timing failure was fixed by polling actual API readiness; no assertion was removed.
+
+The final stack is restored to its ordinary database, with eight healthy running services and initializer exited 0. Only loopback port 8080 is published. Unique test databases/queues and synthetic messages were removed. Secret/log scan, Git whitespace and byte-for-byte preservation of protected Phase 0/Phase 1 history passed. Runtime database privileges and Docker network boundaries remain intact.
+
+`pnpm audit --json` remains **FAIL/exit 1 with four inherited moderate MinIO-chain advisories, no low/high/critical findings**. No advisories are suppressed; actual snapshot and limitations are linked from [phase-2-verification.md](phase-2-verification.md). Local developer PASS is for Phase 2 functional/security acceptance, not an assertion that every dependency is vulnerability-free or that production is approved. Deployment TLS/external SMTP, backup restore, container/Go scanning, legal/privacy policy and later-phase workflows remain unexecuted release gates.
+
+All requested requirement coverage, API/UI inventory, migration/security decisions, changed file groups, actual commands, failures/repairs and acceptance checklist are in the Phase 2 report. **STOP: await independent security-focused audit and explicit owner authorization.** No commit, push or Phase 3 implementation.
+
+
+## Independent Phase 2 audit remediation — 2026-10-29
+
+Owner supplied independent FAIL with F01–F05 (two high, three medium; no critical findings). Branch `phase-2/auth-multitenancy`, HEAD `e830a84645f3bfe4a7535d2f023a426d39459c99` confirmed; existing uncommitted implementation preserved. Remediation is limited to Phase 2. Ten frontend security regressions currently pass; full database/concurrency/browser and infrastructure re-verification is underway. Historical reports remain intact below the current audit status. No independent approval claimed.
+
+### Phase 2 audit remediation completed locally — 2026-10-29
+
+F01–F04 FIXED with PostgreSQL, HTTP concurrency and mounted-browser evidence; F05 UNRESOLVED (four inherited moderate MinIO-chain advisories, no safe compatible upstream fix identified). Historical independent FAIL remains authoritative pending re-audit. See [verification](phase-2-verification.md#remediation-outcome-and-exact-evidence) and [advisory assessment](phase-2-advisories.md).
+
+Executed: frozen install, lint, typecheck, build; standard Vitest 31 passed/2 Docker skips, Phase 2 Vitest 5 passed, isolated Phase 2 browser 2 passed, infrastructure browser 1 passed/2 Phase 2 skips, 11 infrastructure checks; five migrations and Prisma validation; Docker image builds and base/dev config; protected-document and secret checks. Audit exits 1 with four moderate vulnerabilities. Initial host Prisma validation lacked DATABASE_URL; container validation passed. No functional test remains failed. No architecture/Phase 1 history changes, commits, pushes or Phase 3 work. Working tree retains uncommitted Phase 2 implementation and remediation. Stop for independent security re-audit and owner authorization.

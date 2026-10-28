@@ -17,7 +17,9 @@
     "prisma:generate": "pnpm --filter @smart-recruit/api prisma:generate",
     "prisma:migrate:deploy": "pnpm --filter @smart-recruit/api prisma:migrate:deploy",
     "db:migrate": "node scripts/migrate.mjs",
-    "test:watch": "pnpm build && vitest"
+    "test:watch": "pnpm build && vitest",
+    "test:phase2": "PHASE2_DATABASE_TESTS=1 PHASE2_AUTH_TESTS=1 PHASE2_TENANT_TESTS=1 PHASE2_NOTIFICATION_TESTS=1 vitest run tests/phase2",
+    "test:phase2:e2e": "node scripts/phase2-browser.mjs"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

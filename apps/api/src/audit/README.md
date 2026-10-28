@@ -1,3 +1,3 @@
-# audit
+Phase 2 implementation.
 
-Reserved module boundary from the approved architecture. No feature is implemented here in Phase 1; implementation requires authorization for its owning phase.
+Phase 2 tenant AuditLog and global AuthSecurityEvent writes occur in auth/company/invitation transactions. Runtime UPDATE/DELETE is denied; no public audit API is implemented.

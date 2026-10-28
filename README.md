@@ -1,6 +1,6 @@
 # SmartRecruit AI
 
-Phase 1 provides a React status page, NestJS API, independent BullMQ worker, and local infrastructure. Recruitment, authentication and AI inference are not implemented. The approved design is in [docs/architecture.md](docs/architecture.md); verification evidence is in [docs/progress.md](docs/progress.md).
+Phase 2 adds secure staff authentication, company workspaces and roles, team invitations, password reset, and durable SMTP notifications to the verified Phase 1 infrastructure. Recruitment and AI inference are not implemented. Phase 2 developer verification is recorded in [docs/phase-2-verification.md](docs/phase-2-verification.md); independent security approval is still required. The approved design is in [docs/architecture.md](docs/architecture.md); verification evidence is in [docs/progress.md](docs/progress.md).
 
 ## Prerequisites
 
@@ -37,7 +37,7 @@ Open http://localhost:8080. The page polls actual API readiness; it reports erro
 ## Workspace and development
 
 - `apps/web`: React, Vite, Router, Tailwind, shadcn-style accessible primitives (`components.json`), TanStack Query and a React Hook Form/Zod refresh-settings form.
-- `apps/api`: modular NestJS REST/OpenAPI and origin-restricted Socket.IO handshake. Future module directories are empty boundaries, not completed features.
+- `apps/api`: modular NestJS REST/OpenAPI and origin-restricted Socket.IO handshake. Auth, companies, memberships and notifications are implemented; later-phase directories remain documented boundaries.
 - `apps/worker`: independent Nest application context, BullMQ smoke processor, health server and database heartbeat. It imports only the API's explicit infrastructure export, never its bootstrap or gateway.
 - `packages/shared`: transport types/constants without data access; `packages/config`: validated server environment; `packages/ai-contracts`: task names only, with prompts/schemas deferred to Phase 3.
 
@@ -66,7 +66,7 @@ pnpm db:migrate
 
 The wrapper reads `.env` privately and passes the schema-owner credential only to the ephemeral migration process. Normal API/worker connections use `smart_recruit_runtime`, which has data privileges but cannot create schema objects. Migrations never run automatically on API startup. Prisma's migration locking serializes deployment; no `db push` is used.
 
-The baseline creates only `InfrastructureState` (schema version 1) and `WorkerHeartbeat`. Domain schemas arrive in their assigned phases. PostgreSQL's initialization script runs only for a fresh volume; editing credentials in `.env` does not rotate existing database/MinIO credentials automatically. Existing data needs an explicit rotation/migration procedure.
+The Phase 1 baseline creates `InfrastructureState` and `WorkerHeartbeat`. Phase 2 adds identity/session/reset, company/membership/invitation, audit and tenant/global notification tables; readiness now requires schema version 2. Later recruitment schemas remain deferred. PostgreSQL's initialization script runs only for a fresh volume; editing credentials in `.env` does not rotate existing database/MinIO credentials automatically. Existing data needs an explicit rotation/migration procedure.
 
 ## Health and verification
 
@@ -105,9 +105,9 @@ Worker probes are private on port 3001. Readiness requires a running consumer an
 
 Named volumes persist database, Redis AOF (`noeviction`), private objects and Mailpit data. Logs contain safe event names/component state, not payloads or credentials; Nginx request logging is disabled to avoid URL token leakage. Runtime data services are isolated on an internal network; API/worker have outbound networking for later integrations. This is not an egress allowlist.
 
-TLS, production secret management, maintained-image review, backups/restore drills, real SMTP/provider policy, authentication, tenant isolation and candidate privacy tests remain release gates for their later phases. Do not expose this foundation to real candidate data. Phase 2 has not begun.
+TLS, production secret management, maintained-image review, backups/restore drills, real SMTP/provider policy and candidate privacy remain production release gates. Phase 2 auth and tenant security tests do not authorize production deployment or real candidate data.
 
-Current dependency-audit limitation after audit remediation: four moderate advisories remain in MinIO’s parsing dependencies; none are suppressed. esbuild and js-yaml advisories were fixed with compatible updates. See [the per-advisory analysis](docs/phase-1-advisories.md). Independent Phase 1 re-evaluation is pending; local passing checks are not production release approval.
+Current dependency-audit limitation after audit remediation: four moderate advisories remain in MinIO’s parsing dependencies; none are suppressed. esbuild and js-yaml advisories were fixed with compatible updates. See [the per-advisory analysis](docs/phase-1-advisories.md). The owner reports independent Phase 1 approval. Phase 2 requires a new independent security-focused audit; local passing checks are not production release approval.
 
 ## Vitest testing foundation
 
@@ -116,3 +116,36 @@ Current dependency-audit limitation after audit remediation: four moderate advis
 Tests can live under `tests/**/*.test.{mjs,ts,tsx}`, `apps/*/src/**/*.test.{ts,tsx}`, or `packages/*/src/**/*.test.ts`. Playwright E2E and generated/build artifacts are excluded. Backend tests load the TypeScript-compiled modules so Nest decorator/constructor metadata is retained; rebuild after backend edits during watch mode. Vitest's Node environment, automatic JSX transform and web `@` alias support React server-render tests now. For future DOM interaction unit tests, add a DOM environment dependency when needed and select it per test using [Vitest's documented environment configuration](https://vitest.dev/guide/environment); existing browser interaction checks remain Playwright. No additional DOM framework is installed before it is needed.
 
 The corrected infrastructure test requires exact PostgreSQL SQLSTATE `42501` and S3 `AccessDenied`; transport/missing-table/unrelated errors fail. Recovery compares persisted heartbeat timestamps across restart with bounded polling. Runtime inventory must contain exactly the nine named services, including a successfully exited initializer and eight running healthy services.
+
+
+## Phase 2 setup and workflows
+
+For an existing Phase 1 checkout, run `node scripts/setup-auth-env.mjs` once to append missing independent auth/CSRF/email encryption keys to the ignored `.env`, preserving existing values. Fresh `setup-env.mjs` now generates these keys too. Never share resolved Compose configuration or `.env`.
+
+```sh
+pnpm install --frozen-lockfile
+pnpm build
+docker compose build api worker web
+pnpm db:migrate
+node scripts/migrate.mjs --status
+docker compose up -d --wait
+```
+
+Open `/register` to create an admin and workspace atomically, `/login` to sign in, or `/workspace` to select an authorized workspace. Admins manage team roles, memberships, invitation delivery/revocation/resend and company name. A last active admin cannot be demoted or removed. Users can create additional companies and switch independent roles. All company lists are bounded to 100 entries with cursor pagination. Active sessions can be revoked. `/reset-request` always gives a generic response; reset links expire after 30 minutes. Team links expire after seven days and are single-use. Existing users sign in as the invited identity before accepting; new users create an account through the invitation. Resending invalidates the old link without extending expiry.
+
+Email tokens are URL fragments, cleared immediately on page load, never query parameters. Access JWTs live only in browser memory; refresh cookies are HttpOnly and rotate with a fixed 30-day family lifetime. Refresh is single-flight per tab and uses Web Locks across supported browser tabs. A concurrent replay deliberately revokes the family, requiring sign-in. Cookies are Secure in production; local HTTP is development-only. Runtime authorization reloads membership on every company transaction. Cache contents are cleared on workspace changes/logout; no auth data is persisted to localStorage.
+
+The independent worker polls both PostgreSQL outboxes without relying on Redis scheduling. BullMQ jobs contain only IDs and scope/company context. SMTP acceptance is distinct from inbox receipt. Pending work survives Redis loss and bounded leases recover after worker failure. Attempts cap at five. Terminal delivery states purge encrypted token payloads; a new authorized resend/reset request creates a new token. SMTP can duplicate an email after an ambiguous crash; no exactly-once delivery guarantee is made. Queue keys are namespaced by database name so isolated tests cannot consume development jobs.
+
+Keys are 32-byte hex values, independently generated. `AUTH_KEY_ID` identifies the active JWT key; `NOTIFICATION_KEY_VERSION` identifies the AES-GCM key. Rotate auth/CSRF keys together across API replicas; existing access tokens/CSRF state then need renewal. Before changing the notification key/version, drain or cancel unfinished deliveries; old-version payloads fail closed and require authorized resend. Keep the old key available in protected operational backups until pending ciphertext has been handled. This local implementation accepts one active key version and does not silently decrypt with a fallback key. Mailpit is the local SMTP target; deployment SMTP/TLS/secret management remains a release decision.
+
+```sh
+pnpm test                 # unit/configuration tests; service tests explicitly skipped
+pnpm test:phase2          # real PostgreSQL, Redis, Mailpit; requires current API image
+pnpm test:phase2:e2e      # isolated DB; temporarily switches API/worker, restores base stack
+pnpm test:infrastructure
+pnpm test:e2e            # existing infrastructure browser smoke
+pnpm audit --json        # four inherited moderate advisories remain unsuppressed
+```
+
+Phase 2 integration tests create uniquely named disposable databases and queue namespaces, never truncate development tables, and remove their synthetic Mailpit messages. The browser wrapper temporarily restarts API/worker/web/Nginx, so run locally without concurrent use. It restores the ordinary stack and drops only its generated database in `finally`. No candidate data is used. Default tests deliberately skip Docker-dependent suites; an explicit Phase 2 test command is required for acceptance.

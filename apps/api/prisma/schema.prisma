@@ -1,18 +1,316 @@
 generator client {
   provider = "prisma-client-js"
-  output = "../generated/client"
+  output   = "../generated/client"
 }
+
 datasource db {
   provider = "postgresql"
-  url = env("DATABASE_URL")
+  url      = env("DATABASE_URL")
 }
-// Infrastructure only; recruitment models belong to later phases.
+
+// Infrastructure and Phase 2 identity/notification foundation only.
 model InfrastructureState {
-  id Int @id
-  version Int
+  id          Int      @id
+  version     Int
   installedAt DateTime @default(now()) @db.Timestamptz
 }
+
 model WorkerHeartbeat {
-  id String @id
+  id        String   @id
   updatedAt DateTime @db.Timestamptz
+}
+
+enum AccountStatus {
+  ACTIVE
+  DISABLED
+}
+
+enum CompanyStatus {
+  ACTIVE
+  SUSPENDED
+}
+
+enum MembershipStatus {
+  ACTIVE
+  INACTIVE
+}
+
+enum CompanyRole {
+  COMPANY_ADMIN
+  RECRUITER
+  VIEWER
+}
+
+enum OperationStatus {
+  PENDING
+  RUNNING
+  RETRY_WAIT
+  RESULT_READY
+  SUCCEEDED
+  FAILED
+  CANCELLED
+}
+
+enum DeliveryStatus {
+  PENDING
+  SENDING
+  RETRY_WAIT
+  SMTP_ACCEPTED
+  FAILED
+  CANCELLED
+  EXPIRED
+}
+
+model User {
+  id              String                     @id @default(uuid()) @db.Uuid
+  normalizedEmail String                     @unique
+  passwordHash    String
+  displayName     String
+  status          AccountStatus              @default(ACTIVE)
+  verifiedAt      DateTime?                  @db.Timestamptz
+  createdAt       DateTime                   @default(now()) @db.Timestamptz
+  updatedAt       DateTime                   @updatedAt @db.Timestamptz
+  memberships     CompanyMembership[]
+  sessions        RefreshSession[]
+  resets          PasswordResetToken[]
+  securityEvents  AuthSecurityEvent[]
+  deliveries      AuthNotificationDelivery[]
+}
+
+model Company {
+  id                     String                 @id @default(uuid()) @db.Uuid
+  name                   String
+  status                 CompanyStatus          @default(ACTIVE)
+  revision               Int                    @default(1)
+  retentionDays          Int                    @default(180)
+  retentionPolicyVersion Int                    @default(1)
+  createdAt              DateTime               @default(now()) @db.Timestamptz
+  updatedAt              DateTime               @updatedAt @db.Timestamptz
+  memberships            CompanyMembership[]
+  invitations            CompanyInvitation[]
+  operations             ProcessingOperation[]
+  outbox                 OutboxEvent[]
+  deliveries             NotificationDelivery[]
+  audit                  AuditLog[]
+}
+
+model CompanyMembership {
+  id          String              @id @default(uuid()) @db.Uuid
+  companyId   String              @db.Uuid
+  userId      String              @db.Uuid
+  role        CompanyRole
+  status      MembershipStatus    @default(ACTIVE)
+  revision    Int                 @default(1)
+  createdAt   DateTime            @default(now()) @db.Timestamptz
+  updatedAt   DateTime            @updatedAt @db.Timestamptz
+  company     Company             @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  user        User                @relation(fields: [userId], references: [id], onDelete: Restrict)
+  invitations CompanyInvitation[]
+  audit       AuditLog[]
+
+  @@unique([companyId, id])
+  @@unique([companyId, userId])
+  @@index([userId])
+}
+
+model RefreshSession {
+  id          String           @id @default(uuid()) @db.Uuid
+  userId      String           @db.Uuid
+  tokenHash   String           @unique
+  familyId    String           @db.Uuid
+  expiresAt   DateTime         @db.Timestamptz
+  revokedAt   DateTime?        @db.Timestamptz
+  rotatedAt   DateTime?        @db.Timestamptz
+  successorId String?          @unique @db.Uuid
+  createdAt   DateTime         @default(now()) @db.Timestamptz
+  user        User             @relation(fields: [userId], references: [id], onDelete: Restrict)
+  successor   RefreshSession?  @relation("rotation", fields: [userId, familyId, successorId], references: [userId, familyId, id], onDelete: Restrict)
+  predecessor RefreshSession[] @relation("rotation")
+
+  @@unique([userId, familyId, id])
+  @@index([familyId])
+  @@index([userId, expiresAt])
+}
+
+model PasswordResetToken {
+  id         String                     @id @default(uuid()) @db.Uuid
+  userId     String                     @db.Uuid
+  tokenHash  String                     @unique
+  expiresAt  DateTime                   @db.Timestamptz
+  consumedAt DateTime?                  @db.Timestamptz
+  revokedAt  DateTime?                  @db.Timestamptz
+  createdAt  DateTime                   @default(now()) @db.Timestamptz
+  user       User                       @relation(fields: [userId], references: [id], onDelete: Restrict)
+  deliveries AuthNotificationDelivery[]
+
+  @@unique([userId, id])
+  @@index([userId, expiresAt])
+}
+
+model AuthSecurityEvent {
+  id          String   @id @default(uuid()) @db.Uuid
+  userId      String?  @db.Uuid
+  kind        String
+  networkHash String?
+  createdAt   DateTime @default(now()) @db.Timestamptz
+  user        User?    @relation(fields: [userId], references: [id], onDelete: Restrict)
+
+  @@index([userId, createdAt])
+  @@index([createdAt])
+}
+
+model CompanyInvitation {
+  id                 String                 @id @default(uuid()) @db.Uuid
+  companyId          String                 @db.Uuid
+  normalizedEmail    String
+  role               CompanyRole
+  issuerMembershipId String                 @db.Uuid
+  tokenHash          String                 @unique
+  generation         Int                    @default(1)
+  expiresAt          DateTime               @db.Timestamptz
+  consumedAt         DateTime?              @db.Timestamptz
+  revokedAt          DateTime?              @db.Timestamptz
+  createdAt          DateTime               @default(now()) @db.Timestamptz
+  updatedAt          DateTime               @updatedAt @db.Timestamptz
+  company            Company                @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  issuer             CompanyMembership      @relation(fields: [companyId, issuerMembershipId], references: [companyId, id], onDelete: Restrict)
+  deliveries         NotificationDelivery[]
+
+  @@unique([companyId, id])
+  @@index([companyId, issuerMembershipId])
+  @@index([companyId, expiresAt])
+}
+
+model ProcessingOperation {
+  id              String                @id @default(uuid()) @db.Uuid
+  companyId       String                @db.Uuid
+  kind            String
+  idempotencyKey  String
+  status          OperationStatus       @default(PENDING)
+  attemptCount    Int                   @default(0)
+  leaseGeneration Int                   @default(0)
+  leaseExpiresAt  DateTime?             @db.Timestamptz
+  availableAt     DateTime              @default(now()) @db.Timestamptz
+  deadlineAt      DateTime              @db.Timestamptz
+  failureCode     String?
+  createdAt       DateTime              @default(now()) @db.Timestamptz
+  updatedAt       DateTime              @updatedAt @db.Timestamptz
+  company         Company               @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  outbox          OutboxEvent[]
+  delivery        NotificationDelivery?
+
+  @@unique([companyId, id])
+  @@unique([companyId, kind, idempotencyKey])
+}
+
+model OutboxEvent {
+  id              String              @id @default(uuid()) @db.Uuid
+  companyId       String              @db.Uuid
+  operationId     String              @db.Uuid
+  topic           String
+  schemaVersion   Int                 @default(1)
+  availableAt     DateTime            @default(now()) @db.Timestamptz
+  publishedAt     DateTime?           @db.Timestamptz
+  leaseExpiresAt  DateTime?           @db.Timestamptz
+  leaseGeneration Int                 @default(0)
+  createdAt       DateTime            @default(now()) @db.Timestamptz
+  company         Company             @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  operation       ProcessingOperation @relation(fields: [companyId, operationId], references: [companyId, id], onDelete: Restrict)
+
+  @@unique([companyId, id])
+  @@index([companyId, operationId])
+}
+
+model AuditLog {
+  id                String            @id @default(uuid()) @db.Uuid
+  companyId         String            @db.Uuid
+  actorMembershipId String            @db.Uuid
+  actorType         String            @default("MEMBER")
+  action            String
+  entityType        String
+  entityId          String            @db.Uuid
+  requestId         String            @db.Uuid
+  summary           Json
+  createdAt         DateTime          @default(now()) @db.Timestamptz
+  company           Company           @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  actor             CompanyMembership @relation(fields: [companyId, actorMembershipId], references: [companyId, id], onDelete: Restrict)
+
+  @@unique([companyId, id])
+  @@index([companyId, actorMembershipId])
+  @@index([companyId, createdAt, id])
+}
+
+model NotificationDelivery {
+  id           String @id @default(uuid()) @db.Uuid
+  companyId    String @db.Uuid
+  operationId  String @unique @db.Uuid
+  invitationId String @db.Uuid
+
+  template         String
+  templateVersion  Int            @default(1)
+  generation       Int            @default(1)
+  status           DeliveryStatus @default(PENDING)
+  ciphertext       String?
+  keyVersion       String?
+  payloadExpiresAt DateTime       @db.Timestamptz
+  attemptCount     Int            @default(0)
+  leaseGeneration  Int            @default(0)
+  leaseExpiresAt   DateTime?      @db.Timestamptz
+  availableAt      DateTime       @default(now()) @db.Timestamptz
+  smtpAcceptedAt   DateTime?      @db.Timestamptz
+  failureCode      String?
+  createdAt        DateTime       @default(now()) @db.Timestamptz
+  updatedAt        DateTime       @updatedAt @db.Timestamptz
+
+  company    Company             @relation(fields: [companyId], references: [id], onDelete: Restrict)
+  operation  ProcessingOperation @relation(fields: [companyId, operationId], references: [companyId, id], onDelete: Restrict)
+  invitation CompanyInvitation   @relation(fields: [companyId, invitationId], references: [companyId, id], onDelete: Restrict)
+
+  @@unique([companyId, id])
+  @@unique([companyId, operationId])
+  @@index([companyId, invitationId])
+}
+
+model AuthNotificationDelivery {
+  id           String @id @default(uuid()) @db.Uuid
+  userId       String @db.Uuid
+  resetTokenId String @db.Uuid
+  operationKey String @unique
+
+  template         String
+  templateVersion  Int            @default(1)
+  generation       Int            @default(1)
+  status           DeliveryStatus @default(PENDING)
+  ciphertext       String?
+  keyVersion       String?
+  payloadExpiresAt DateTime       @db.Timestamptz
+  attemptCount     Int            @default(0)
+  leaseGeneration  Int            @default(0)
+  leaseExpiresAt   DateTime?      @db.Timestamptz
+  availableAt      DateTime       @default(now()) @db.Timestamptz
+  smtpAcceptedAt   DateTime?      @db.Timestamptz
+  failureCode      String?
+  createdAt        DateTime       @default(now()) @db.Timestamptz
+  updatedAt        DateTime       @updatedAt @db.Timestamptz
+
+  user   User               @relation(fields: [userId], references: [id], onDelete: Restrict)
+  reset  PasswordResetToken @relation(fields: [userId, resetTokenId], references: [userId, id], onDelete: Restrict)
+  outbox AuthOutboxEvent[]
+
+  @@index([userId, resetTokenId])
+}
+
+model AuthOutboxEvent {
+  id              String                   @id @default(uuid()) @db.Uuid
+  deliveryId      String                   @db.Uuid
+  topic           String
+  schemaVersion   Int                      @default(1)
+  availableAt     DateTime                 @default(now()) @db.Timestamptz
+  publishedAt     DateTime?                @db.Timestamptz
+  leaseExpiresAt  DateTime?                @db.Timestamptz
+  leaseGeneration Int                      @default(0)
+  createdAt       DateTime                 @default(now()) @db.Timestamptz
+  delivery        AuthNotificationDelivery @relation(fields: [deliveryId], references: [id], onDelete: Restrict)
+
+  @@index([deliveryId])
 }

@@ -1,0 +1,10 @@
+const {createRequire}=require('node:module');
+const load=createRequire('/app/package.json');
+const {Infrastructure}=load('/app/dist/common/infrastructure');
+const {Security}=load('/app/dist/auth/security');
+const {Notifications}=load('/app/dist/notifications/notifications');
+const {NotificationRuntime}=load('/app/dist/notifications/runtime');
+const infra=new Infrastructure();const runtime=new NotificationRuntime(infra,new Notifications(infra,new Security()));
+if(process.env.PHASE2_BLOCK_DISPATCH==='1')runtime.dispatch=()=>new Promise(()=>{});
+runtime.onModuleInit().then(()=>process.send?.('ready')).catch(()=>process.exit(1));
+process.on('SIGTERM',()=>runtime.onModuleDestroy().then(()=>infra.onModuleDestroy()).then(()=>process.exit(0)));

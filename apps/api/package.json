@@ -6,6 +6,18 @@
     "./infrastructure": {
       "types": "./dist/common/infrastructure.d.ts",
       "default": "./dist/common/infrastructure.js"
+    },
+    "./notifications": {
+      "types": "./dist/notifications/notifications.d.ts",
+      "default": "./dist/notifications/notifications.js"
+    },
+    "./notification-runtime": {
+      "types": "./dist/notifications/runtime.d.ts",
+      "default": "./dist/notifications/runtime.js"
+    },
+    "./security": {
+      "types": "./dist/auth/security.d.ts",
+      "default": "./dist/auth/security.js"
     }
   },
   "files": [
@@ -24,23 +36,30 @@
   "dependencies": {
     "@nestjs/common": "11.2.8",
     "@nestjs/core": "11.2.8",
-    "reflect-metadata": "0.2.2",
-    "rxjs": "7.8.2",
-    "@smart-recruit/config": "workspace:*",
-    "@smart-recruit/shared": "workspace:*",
     "@nestjs/platform-express": "11.2.8",
     "@nestjs/platform-socket.io": "11.2.8",
-    "@nestjs/websockets": "11.2.8",
     "@nestjs/swagger": "11.4.7",
+    "@nestjs/websockets": "11.2.8",
     "@prisma/client": "6.19.3",
-    "prisma": "6.19.3",
-    "ioredis": "5.11.1",
-    "minio": "8.0.7",
-    "class-validator": "0.15.1",
+    "@smart-recruit/config": "workspace:*",
+    "@smart-recruit/shared": "workspace:*",
+    "argon2": "0.45.1",
+    "bullmq": "5.81.5",
     "class-transformer": "0.5.1",
-    "socket.io": "4.8.4"
+    "class-validator": "0.15.1",
+    "ioredis": "5.11.1",
+    "jose": "6.2.13",
+    "minio": "8.0.7",
+    "nodemailer": "10.2.1",
+    "prisma": "6.19.3",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2",
+    "socket.io": "4.8.4",
+    "zod": "4.6.7"
   },
   "devDependencies": {
+    "@types/express": "5.0.6",
+    "@types/nodemailer": "8.0.2",
     "tsc-watch": "7.2.1"
   }
 }

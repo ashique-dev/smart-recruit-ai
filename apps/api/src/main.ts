@@ -1,3 +1,4 @@
+import { SafeErrors } from './common/safe-errors';
 import 'reflect-metadata';
 import { randomUUID } from 'node:crypto';
 import { NestFactory } from '@nestjs/core';
@@ -10,6 +11,9 @@ import { OriginSocketAdapter } from './common/socket.adapter';
 async function bootstrap() {
   const env = readEnvironment();
   const app = await NestFactory.create(AppModule, { logger });
+  app.getHttpAdapter().getInstance().set('trust proxy', 1);
+  app.use((_req: unknown, res: { setHeader: (k: string, v: string) => void }, next: () => void) => { res.setHeader('Cache-Control', 'no-store'); next(); });
+  app.useGlobalFilters(new SafeErrors());
   app.setGlobalPrefix('api/v1', { exclude: ['health/live', 'health/ready'] });
   app.useGlobalPipes(new ValidationPipe({ whitelist: true, forbidNonWhitelisted: true, transform: true, transformOptions: { enableImplicitConversion: false } }));
   app.enableCors({ origin: env.CORS_ORIGIN, credentials: true });
