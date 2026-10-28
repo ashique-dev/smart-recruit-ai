@@ -1,0 +1,18 @@
+generator client {
+  provider = "prisma-client-js"
+  output = "../generated/client"
+}
+datasource db {
+  provider = "postgresql"
+  url = env("DATABASE_URL")
+}
+// Infrastructure only; recruitment models belong to later phases.
+model InfrastructureState {
+  id Int @id
+  version Int
+  installedAt DateTime @default(now()) @db.Timestamptz
+}
+model WorkerHeartbeat {
+  id String @id
+  updatedAt DateTime @db.Timestamptz
+}

@@ -1,0 +1,157 @@
+name: smart-recruit-ai
+services:
+  postgres:
+    image: postgres:17.7-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-smart_recruit}
+      POSTGRES_USER: ${POSTGRES_USER:-smart_recruit_owner}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD}
+      POSTGRES_RUNTIME_PASSWORD: ${POSTGRES_RUNTIME_PASSWORD:?Set POSTGRES_RUNTIME_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./infrastructure/postgres/init.sh:/docker-entrypoint-initdb.d/01-runtime.sh:ro
+    networks: [data]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD-SHELL, 'pg_isready -U "$$POSTGRES_USER" -d "$$POSTGRES_DB"']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  redis:
+    image: redis:7.4.7-alpine
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD:?Set REDIS_PASSWORD}
+    command: [sh, -c, 'exec redis-server --requirepass "$$REDIS_PASSWORD" --appendonly yes --maxmemory-policy noeviction']
+    volumes: [redis_data:/data]
+    networks: [data]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD-SHELL, 'REDISCLI_AUTH="$$REDIS_PASSWORD" redis-cli ping | grep -q PONG']
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  minio:
+    build: {context: ., dockerfile: infrastructure/minio/Dockerfile, target: server}
+    command: server /data --console-address :9001
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-smart_recruit_root}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD}
+    networks: [data]
+    volumes: [minio_data:/data]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, curl, -f, http://localhost:9000/minio/health/ready]
+      interval: 5s
+      timeout: 3s
+      retries: 30
+  minio-init:
+    build: {context: ., dockerfile: infrastructure/minio/Dockerfile, target: client}
+    entrypoint: [/bin/sh, /bootstrap/init.sh]
+    environment:
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-smart_recruit_root}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?Set MINIO_ROOT_PASSWORD}
+      S3_BUCKET: ${S3_BUCKET:-smart-recruit-private}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-smart_recruit_app}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:?Set S3_SECRET_KEY}
+    volumes: [./infrastructure/minio/init.sh:/bootstrap/init.sh:ro]
+    networks: [data]
+    depends_on:
+      minio: {condition: service_healthy}
+    restart: 'no'
+  mailpit:
+    image: axllent/mailpit:v1.27.10
+    environment:
+      MP_DATABASE: /data/mailpit.db
+      MP_MAX_MESSAGES: 100
+    volumes: [mailpit_data:/data]
+    networks: [data]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, /mailpit, readyz]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+  api:
+    build: {context: ., dockerfile: apps/api/Dockerfile, target: runtime}
+    init: true
+    environment: &app-environment
+      NODE_ENV: ${NODE_ENV:-development}
+      API_PORT: 3000
+      WORKER_PORT: 3001
+      PUBLIC_APP_URL: ${PUBLIC_APP_URL:-http://localhost:8080}
+      CORS_ORIGIN: ${CORS_ORIGIN:-http://localhost:8080}
+      DATABASE_URL: postgresql://smart_recruit_runtime:${POSTGRES_RUNTIME_PASSWORD:?Set POSTGRES_RUNTIME_PASSWORD}@postgres:5432/${POSTGRES_DB:-smart_recruit}?schema=public&connect_timeout=3&pool_timeout=3&socket_timeout=3
+      REDIS_URL: redis://:${REDIS_PASSWORD:?Set REDIS_PASSWORD}@redis:6379/0
+      S3_ENDPOINT: http://minio:9000
+      S3_REGION: ${S3_REGION:-us-east-1}
+      S3_BUCKET: ${S3_BUCKET:-smart-recruit-private}
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-smart_recruit_app}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:?Set S3_SECRET_KEY}
+      SMTP_HOST: mailpit
+      SMTP_PORT: 1025
+      AI_PROVIDER: ${AI_PROVIDER:?Choose AI_PROVIDER}
+    networks: [edge, data, outbound]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      minio-init: {condition: service_completed_successfully}
+      mailpit: {condition: service_healthy}
+    restart: unless-stopped
+    stop_grace_period: 30s
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://localhost:3000/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+  worker:
+    build: {context: ., dockerfile: apps/worker/Dockerfile, target: runtime}
+    init: true
+    environment: *app-environment
+    networks: [data, outbound]
+    depends_on:
+      postgres: {condition: service_healthy}
+      redis: {condition: service_healthy}
+      minio-init: {condition: service_completed_successfully}
+      mailpit: {condition: service_healthy}
+    restart: unless-stopped
+    stop_grace_period: 30s
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://localhost:3001/health/ready').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+      start_period: 10s
+  web:
+    build: {context: ., dockerfile: apps/web/Dockerfile, target: runtime}
+    networks: [edge]
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, wget, -q, --spider, http://127.0.0.1:8080/]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+  nginx:
+    image: nginx:1.28.1-alpine
+    ports: ['127.0.0.1:${EDGE_PORT:-8080}:8080']
+    volumes: [./infrastructure/nginx/default.conf:/etc/nginx/conf.d/default.conf:ro]
+    networks: [edge]
+    depends_on:
+      api: {condition: service_healthy}
+      web: {condition: service_healthy}
+    restart: unless-stopped
+    healthcheck:
+      test: [CMD, wget, -q, --spider, http://127.0.0.1:8080/health/live]
+      interval: 10s
+      timeout: 3s
+      retries: 10
+networks:
+  edge:
+  outbound:
+  data:
+    internal: true
+volumes:
+  postgres_data:
+  redis_data:
+  minio_data:
+  mailpit_data:

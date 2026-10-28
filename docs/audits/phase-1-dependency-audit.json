@@ -1,0 +1,184 @@
+{
+  "before": {
+    "counts": {
+      "info": 0,
+      "low": 1,
+      "moderate": 5,
+      "high": 0,
+      "critical": 0
+    },
+    "advisories": [
+      {
+        "github_advisory_id": "GHSA-g7r4-m6w7-qqqr",
+        "module_name": "esbuild",
+        "severity": "low",
+        "vulnerable_versions": ">=0.27.3 <0.28.1",
+        "patched_versions": ">=0.28.1",
+        "findings": [
+          {
+            "version": "0.27.7",
+            "paths": [
+              "apps__web>vite>esbuild"
+            ]
+          }
+        ],
+        "url": "https://github.com/advisories/GHSA-g7r4-m6w7-qqqr"
+      },
+      {
+        "github_advisory_id": "GHSA-vcc3-ghjq-m6fr",
+        "module_name": "decode-uri-component",
+        "severity": "moderate",
+        "vulnerable_versions": "<=0.4.2",
+        "patched_versions": ">=0.5.0",
+        "findings": [
+          {
+            "version": "0.2.2",
+            "paths": [
+              "apps__api>minio>query-string>decode-uri-component"
+            ]
+          }
+        ],
+        "url": "https://github.com/advisories/GHSA-vcc3-ghjq-m6fr"
+      },
+      {
+        "github_advisory_id": "GHSA-528h-pc64-c93x",
+        "module_name": "stream-json",
+        "severity": "moderate",
+        "vulnerable_versions": "<=3.4.0",
+        "patched_versions": ">=3.5.0",
+        "findings": [
+          {
+            "version": "1.9.1",
+            "paths": [
+              "apps__api>minio>stream-json"
+            ]
+          }
+        ],
+        "url": "https://github.com/advisories/GHSA-528h-pc64-c93x"
+      },
+      {
+        "github_advisory_id": "GHSA-r3ph-w7gj-g6xm",
+        "module_name": "js-yaml",
+        "severity": "moderate",
+        "vulnerable_versions": ">=5.0.0 <=5.4.0",
+        "patched_versions": ">=5.4.1",
+        "findings": [
+          {
+            "version": "5.3.0",
+            "paths": [
+              "apps__api>@nestjs/swagger>js-yaml"
+            ]
+          }
+        ],
+        "url": "https://github.com/advisories/GHSA-r3ph-w7gj-g6xm"
+      },
+      {
+        "github_advisory_id": "GHSA-hqr4-qq8f-hg3x",
+        "module_name": "stream-json",
+        "severity": "moderate",
+        "vulnerable_versions": "<=3.5.0",
+        "patched_versions": ">=3.6.0",
+        "findings": [
+          {
+            "version": "1.9.1",
+            "paths": [
+              "apps__api>minio>stream-json"
+            ]
+          }
+        ],
+        "url": "https://github.com/advisories/GHSA-hqr4-qq8f-hg3x"
+      },
+      {
+        "github_advisory_id": "GHSA-mjw6-4jj6-33hc",
+        "module_name": "stream-json",
+        "severity": "moderate",
+        "vulnerable_versions": "<3.6.0",
+        "patched_versions": ">=3.6.0",
+        "findings": [
+          {
+            "version": "1.9.1",
+            "paths": [
+              "apps__api>minio>stream-json"
+            ]
+          }
+        ],
+        "url": "https://github.com/advisories/GHSA-mjw6-4jj6-33hc"
+      }
+    ]
+  },
+  "after": {
+    "counts": {
+      "info": 0,
+      "low": 0,
+      "moderate": 4,
+      "high": 0,
+      "critical": 0
+    },
+    "advisories": [
+      {
+        "github_advisory_id": "GHSA-vcc3-ghjq-m6fr",
+        "module_name": "decode-uri-component",
+        "severity": "moderate",
+        "vulnerable_versions": "<=0.4.2",
+        "patched_versions": ">=0.5.0",
+        "findings": [
+          {
+            "version": "0.2.2",
+            "paths": [
+              "apps__api>minio>query-string>decode-uri-component"
+            ]
+          }
+        ],
+        "url": "https://github.com/advisories/GHSA-vcc3-ghjq-m6fr"
+      },
+      {
+        "github_advisory_id": "GHSA-528h-pc64-c93x",
+        "module_name": "stream-json",
+        "severity": "moderate",
+        "vulnerable_versions": "<=3.4.0",
+        "patched_versions": ">=3.5.0",
+        "findings": [
+          {
+            "version": "1.9.1",
+            "paths": [
+              "apps__api>minio>stream-json"
+            ]
+          }
+        ],
+        "url": "https://github.com/advisories/GHSA-528h-pc64-c93x"
+      },
+      {
+        "github_advisory_id": "GHSA-hqr4-qq8f-hg3x",
+        "module_name": "stream-json",
+        "severity": "moderate",
+        "vulnerable_versions": "<=3.5.0",
+        "patched_versions": ">=3.6.0",
+        "findings": [
+          {
+            "version": "1.9.1",
+            "paths": [
+              "apps__api>minio>stream-json"
+            ]
+          }
+        ],
+        "url": "https://github.com/advisories/GHSA-hqr4-qq8f-hg3x"
+      },
+      {
+        "github_advisory_id": "GHSA-mjw6-4jj6-33hc",
+        "module_name": "stream-json",
+        "severity": "moderate",
+        "vulnerable_versions": "<3.6.0",
+        "patched_versions": ">=3.6.0",
+        "findings": [
+          {
+            "version": "1.9.1",
+            "paths": [
+              "apps__api>minio>stream-json"
+            ]
+          }
+        ],
+        "url": "https://github.com/advisories/GHSA-mjw6-4jj6-33hc"
+      }
+    ]
+  }
+}

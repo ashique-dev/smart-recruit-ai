@@ -1,0 +1,17 @@
+packages:
+  - 'apps/*'
+  - 'packages/*'
+onlyBuiltDependencies:
+  - '@nestjs/core'
+  - '@prisma/client'
+  - '@prisma/engines'
+  - prisma
+  - esbuild
+
+overrides:
+  multer: 2.5.0
+  deepmerge-ts: 8.0.0
+  '@nestjs/swagger@11.4.7>js-yaml': 5.4.1
+ignoredBuiltDependencies:
+  - '@scarf/scarf'
+  - msgpackr-extract

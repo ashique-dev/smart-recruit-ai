@@ -1,0 +1,13 @@
+.git
+node_modules
+**/node_modules
+**/dist
+.env
+.env.*
+**/generated
+playwright-report
+test-results
+.pnpm-store
+.agents
+.codex
+.aws

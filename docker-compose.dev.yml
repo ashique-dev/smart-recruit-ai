@@ -1,0 +1,39 @@
+services:
+  api:
+    build: {target: development}
+    working_dir: /workspace
+    command: [pnpm, --filter, '@smart-recruit/api', dev]
+    volumes:
+      - ./apps/api/src:/workspace/apps/api/src:ro
+      - ./apps/api/prisma:/workspace/apps/api/prisma:ro
+      - api_dependencies:/workspace/node_modules
+  worker:
+    build: {target: development}
+    working_dir: /workspace
+    command: [pnpm, --filter, '@smart-recruit/worker', dev]
+    volumes:
+      - ./apps/worker/src:/workspace/apps/worker/src:ro
+      - worker_dependencies:/workspace/node_modules
+  web:
+    build: {target: development}
+    working_dir: /workspace
+    command: [pnpm, --filter, '@smart-recruit/web', dev]
+    environment:
+      DEV_EDGE_PORT: ${EDGE_PORT:-8080}
+    volumes:
+      - ./apps/web/src:/workspace/apps/web/src:ro
+      - ./apps/web/index.html:/workspace/apps/web/index.html:ro
+      - web_dependencies:/workspace/node_modules
+    healthcheck:
+      test: [CMD, node, -e, "fetch('http://localhost:5173/').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+  nginx:
+    volumes:
+      - ./infrastructure/nginx/dev.conf:/etc/nginx/conf.d/default.conf:ro
+  mailpit:
+    ports: ['127.0.0.1:8025:8025']
+  minio:
+    ports: ['127.0.0.1:9001:9001']
+volumes:
+  api_dependencies:
+  worker_dependencies:
+  web_dependencies:

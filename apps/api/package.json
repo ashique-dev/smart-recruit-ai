@@ -1,0 +1,46 @@
+{
+  "version": "0.1.0",
+  "private": true,
+  "name": "@smart-recruit/api",
+  "exports": {
+    "./infrastructure": {
+      "types": "./dist/common/infrastructure.d.ts",
+      "default": "./dist/common/infrastructure.js"
+    }
+  },
+  "files": [
+    "dist",
+    "generated",
+    "prisma"
+  ],
+  "scripts": {
+    "build": "pnpm prisma:generate && tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "dev": "tsc-watch -p tsconfig.json --onSuccess \"node dist/main.js\"",
+    "start": "node dist/main.js",
+    "prisma:generate": "prisma generate",
+    "prisma:migrate:deploy": "prisma migrate deploy"
+  },
+  "dependencies": {
+    "@nestjs/common": "11.2.8",
+    "@nestjs/core": "11.2.8",
+    "reflect-metadata": "0.2.2",
+    "rxjs": "7.8.2",
+    "@smart-recruit/config": "workspace:*",
+    "@smart-recruit/shared": "workspace:*",
+    "@nestjs/platform-express": "11.2.8",
+    "@nestjs/platform-socket.io": "11.2.8",
+    "@nestjs/websockets": "11.2.8",
+    "@nestjs/swagger": "11.4.7",
+    "@prisma/client": "6.19.3",
+    "prisma": "6.19.3",
+    "ioredis": "5.11.1",
+    "minio": "8.0.7",
+    "class-validator": "0.15.1",
+    "class-transformer": "0.5.1",
+    "socket.io": "4.8.4"
+  },
+  "devDependencies": {
+    "tsc-watch": "7.2.1"
+  }
+}

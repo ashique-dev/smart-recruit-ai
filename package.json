@@ -1,0 +1,33 @@
+{
+  "name": "smart-recruit-ai",
+  "private": true,
+  "version": "0.1.0",
+  "packageManager": "pnpm@10.28.2",
+  "engines": {
+    "node": ">=24.13.0 <25"
+  },
+  "scripts": {
+    "build": "pnpm -r build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "eslint .",
+    "test": "pnpm build && vitest run",
+    "test:e2e": "playwright test",
+    "test:infrastructure": "node scripts/verify-infrastructure.mjs",
+    "dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
+    "prisma:generate": "pnpm --filter @smart-recruit/api prisma:generate",
+    "prisma:migrate:deploy": "pnpm --filter @smart-recruit/api prisma:migrate:deploy",
+    "db:migrate": "node scripts/migrate.mjs",
+    "test:watch": "pnpm build && vitest"
+  },
+  "devDependencies": {
+    "@eslint/js": "10.0.1",
+    "@playwright/test": "1.64.1",
+    "@types/node": "24.19.2",
+    "eslint": "10.13.0",
+    "globals": "16.5.0",
+    "socket.io-client": "4.8.4",
+    "typescript": "5.9.3",
+    "typescript-eslint": "8.72.1",
+    "vitest": "4.1.12"
+  }
+}
