@@ -43,6 +43,9 @@ importers:
 
   apps/api:
     dependencies:
+      '@smart-recruit/ai-contracts':
+        specifier: workspace:*
+        version: link:../../packages/ai-contracts
       '@nestjs/common':
         specifier: 11.2.8
         version: 11.2.8(class-transformer@0.5.1)(class-validator@0.15.1)(reflect-metadata@0.2.2)(rxjs@7.8.2)
@@ -212,7 +215,11 @@ importers:
         specifier: 7.2.1
         version: 7.2.1(typescript@5.9.3)
 
-  packages/ai-contracts: {}
+  packages/ai-contracts:
+    dependencies:
+      zod:
+        specifier: 4.6.7
+        version: 4.6.7
 
   packages/config:
     dependencies:

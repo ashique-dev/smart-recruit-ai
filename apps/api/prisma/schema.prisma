@@ -78,6 +78,7 @@ model User {
 }
 
 model Company {
+ approvalCommands RubricApprovalCommand[]
   id                     String                 @id @default(uuid()) @db.Uuid
   name                   String
   status                 CompanyStatus          @default(ACTIVE)
@@ -92,6 +93,12 @@ model Company {
   outbox                 OutboxEvent[]
   deliveries             NotificationDelivery[]
   audit                  AuditLog[]
+  jobs Job[]
+  configs JobEvaluationConfig[]
+  criteria RubricCriterion[]
+  aiRequests AiRequest[]
+  artifacts AIArtifact[]
+  usage UsageRecord[]
 }
 
 model CompanyMembership {
@@ -107,6 +114,8 @@ model CompanyMembership {
   user        User                @relation(fields: [userId], references: [id], onDelete: Restrict)
   invitations CompanyInvitation[]
   audit       AuditLog[]
+  jobs Job[]
+  approvals JobEvaluationConfig[]
 
   @@unique([companyId, id])
   @@unique([companyId, userId])
@@ -198,6 +207,9 @@ model ProcessingOperation {
   company         Company               @relation(fields: [companyId], references: [id], onDelete: Restrict)
   outbox          OutboxEvent[]
   delivery        NotificationDelivery?
+  aiRequest AiRequest?
+  artifact AIArtifact?
+  usage UsageRecord[]
 
   @@unique([companyId, id])
   @@unique([companyId, kind, idempotencyKey])
@@ -313,4 +325,181 @@ model AuthOutboxEvent {
   delivery        AuthNotificationDelivery @relation(fields: [deliveryId], references: [id], onDelete: Restrict)
 
   @@index([deliveryId])
+}
+
+
+enum JobStatus {
+ DRAFT
+ ACTIVE
+ PAUSED
+ CLOSED
+ ARCHIVED
+}
+model Job {
+ approvalCommands RubricApprovalCommand[]
+ id String @id @default(uuid()) @db.Uuid
+ companyId String @db.Uuid
+ creatorMembershipId String @db.Uuid
+ title String
+ description String
+ department String
+ employmentType String
+ workArrangement String
+ location String
+ requirements Json
+ status JobStatus @default(DRAFT)
+ revision Int @default(1)
+ createdAt DateTime @default(now()) @db.Timestamptz
+ updatedAt DateTime @updatedAt @db.Timestamptz
+ company Company @relation(fields:[companyId], references:[id], onDelete:Restrict)
+ creator CompanyMembership @relation(fields:[companyId,creatorMembershipId], references:[companyId,id], onDelete:Restrict)
+ configs JobEvaluationConfig[]
+ requests AiRequest[]
+ artifacts AIArtifact[]
+ @@unique([companyId,id])
+ @@index([companyId,status,createdAt,id])
+ @@index([companyId,creatorMembershipId])
+}
+model JobEvaluationConfig {
+ approvalCommands RubricApprovalCommand[]
+ id String @id @default(uuid()) @db.Uuid
+ companyId String @db.Uuid
+ jobId String @db.Uuid
+ version Int
+ revision Int @default(1)
+ status String @default("DRAFT")
+ sourceDescription String
+ sourceHash String
+ requirements Json
+ scaleVersion String @default("rating-0-4.v1")
+ scoringPolicyVersion String @default("scoring-policy-v1")
+ artifactId String? @db.Uuid
+ approverMembershipId String? @db.Uuid
+ approvedAt DateTime? @db.Timestamptz
+ createdAt DateTime @default(now()) @db.Timestamptz
+ company Company @relation(fields:[companyId],references:[id],onDelete:Restrict)
+ job Job @relation(fields:[companyId,jobId],references:[companyId,id],onDelete:Restrict)
+ approver CompanyMembership? @relation(fields:[companyId,approverMembershipId],references:[companyId,id],onDelete:Restrict)
+ artifact AIArtifact? @relation(fields:[companyId,jobId,artifactId],references:[companyId,jobId,id],onDelete:Restrict)
+ criteria RubricCriterion[]
+ @@unique([companyId,id])
+ @@unique([companyId,jobId,id])
+ @@unique([companyId,jobId,version])
+ @@index([companyId,approverMembershipId])
+ @@index([companyId,artifactId])
+}
+model RubricCriterion {
+ id String @id @default(uuid()) @db.Uuid
+ companyId String @db.Uuid
+ configId String @db.Uuid
+ key String
+ label String
+ description String
+ weight Int
+ anchors Json
+ evidenceRequirements String
+ requirementKeys String[]
+ position Int
+ company Company @relation(fields:[companyId],references:[id],onDelete:Restrict)
+ config JobEvaluationConfig @relation(fields:[companyId,configId],references:[companyId,id],onDelete:Restrict)
+ @@unique([companyId,id])
+ @@unique([companyId,configId,key])
+ @@unique([companyId,configId,position])
+}
+model AiRequest {
+ artifact AIArtifact?
+ id String @id @default(uuid()) @db.Uuid
+ companyId String @db.Uuid
+ jobId String @db.Uuid
+ operationId String @unique @db.Uuid
+ jobRevision Int
+ task String
+ mode String
+ model String
+ promptVersion String
+ schemaVersion String
+ policyVersion String
+ policySnapshot Json
+ input Json
+ inputHash String
+ company Company @relation(fields:[companyId],references:[id],onDelete:Restrict)
+ job Job @relation(fields:[companyId,jobId],references:[companyId,id],onDelete:Restrict)
+ operation ProcessingOperation @relation(fields:[companyId,operationId],references:[companyId,id],onDelete:Restrict)
+ @@unique([companyId,id])
+ @@index([companyId,jobId])
+ @@unique([companyId,jobId,operationId])
+ @@unique([companyId,operationId])
+}
+model AIArtifact {
+ request AiRequest @relation(fields:[companyId,jobId,operationId],references:[companyId,jobId,operationId],onDelete:Restrict)
+ jobId String @db.Uuid
+ job Job @relation(fields:[companyId,jobId],references:[companyId,id],onDelete:Restrict)
+ id String @id @default(uuid()) @db.Uuid
+ companyId String @db.Uuid
+ operationId String @unique @db.Uuid
+ task String
+ model String
+ provider String
+ promptVersion String
+ schemaVersion String
+ inputHash String
+ outputHash String
+ output Json
+ createdAt DateTime @default(now()) @db.Timestamptz
+ company Company @relation(fields:[companyId],references:[id],onDelete:Restrict)
+ operation ProcessingOperation @relation(fields:[companyId,operationId],references:[companyId,id],onDelete:Restrict)
+ configs JobEvaluationConfig[]
+ @@unique([companyId,jobId,operationId])
+ @@unique([companyId,jobId,id])
+ @@unique([companyId,id])
+ @@unique([companyId,operationId])
+}
+model UsageRecord {
+ id String @id @default(uuid()) @db.Uuid
+ companyId String @db.Uuid
+ operationId String @db.Uuid
+ attempt Int
+ mode String
+ task String
+ model String
+ returnedModel String?
+ provider String?
+ promptVersion String
+ schemaVersion String
+ inputTokens Int?
+ outputTokens Int?
+ cacheReadTokens Int?
+ cacheWriteTokens Int?
+ providerGenerationId String?
+ usageMetadataStatus String @default("UNKNOWN")
+ settledAt DateTime? @db.Timestamptz
+ cost Decimal? @db.Decimal(18,8)
+ currency String @default("USD")
+ costStatus String @default("UNKNOWN")
+ outcome String @default("UNKNOWN")
+ latencyMs Int?
+ reservedTokens Int
+ reservedCost Decimal @default(0) @db.Decimal(18,8)
+ createdAt DateTime @default(now()) @db.Timestamptz
+ company Company @relation(fields:[companyId],references:[id],onDelete:Restrict)
+ operation ProcessingOperation @relation(fields:[companyId,operationId],references:[companyId,id],onDelete:Restrict)
+ @@unique([companyId,id])
+ @@unique([companyId,operationId,attempt])
+ @@index([companyId,createdAt,id])
+}
+
+model RubricApprovalCommand {
+ id String @id @default(uuid()) @db.Uuid
+ companyId String @db.Uuid
+ jobId String @db.Uuid
+ configId String @db.Uuid
+ idempotencyKey String @db.Uuid
+ requestHash String
+ result Json
+ createdAt DateTime @default(now()) @db.Timestamptz
+ company Company @relation(fields:[companyId],references:[id],onDelete:Restrict)
+ job Job @relation(fields:[companyId,jobId],references:[companyId,id],onDelete:Restrict)
+ config JobEvaluationConfig @relation(fields:[companyId,jobId,configId],references:[companyId,jobId,id],onDelete:Restrict)
+ @@unique([companyId,id])
+ @@unique([companyId,jobId,configId,idempotencyKey])
 }

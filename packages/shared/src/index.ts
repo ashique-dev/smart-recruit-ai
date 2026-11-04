@@ -1,4 +1,4 @@
-export const INFRASTRUCTURE_SCHEMA_VERSION = 2;
+export const INFRASTRUCTURE_SCHEMA_VERSION = 5;
 export const INFRASTRUCTURE_QUEUE = 'infrastructure-smoke';
 export interface HealthResponse {
   status: 'ok' | 'degraded' | 'unavailable';

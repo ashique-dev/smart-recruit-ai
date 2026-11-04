@@ -1,0 +1,146 @@
+{
+  "source": {
+    "algorithm": "sha256 of sorted Git-visible non-Markdown/non-docs paths and contents",
+    "sha256": "0e0811d877351bda52dbc4be14443438c0659324ada9692c7e31bd4a77e1dd20",
+    "files": 153,
+    "head": "aed850a472feb21dd8f80e6b4e71bf32c9a3c49a"
+  },
+  "commands": [
+    {
+      "command": [
+        "node",
+        "docs/audits/phase-3-f08-evidence/phase2-isolated-browser.mjs"
+      ],
+      "startedAt": "2026-11-04T08:05:09.168Z",
+      "finishedAt": "2026-11-04T08:06:27.524Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "remaining-1.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "test:infrastructure"
+      ],
+      "startedAt": "2026-11-04T08:06:27.524Z",
+      "finishedAt": "2026-11-04T08:06:41.412Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "remaining-2.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "test:e2e"
+      ],
+      "startedAt": "2026-11-04T08:06:41.412Z",
+      "finishedAt": "2026-11-04T08:06:43.147Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "remaining-3.log"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "run",
+        "--rm",
+        "--no-deps",
+        "api",
+        "pnpm",
+        "exec",
+        "prisma",
+        "validate"
+      ],
+      "startedAt": "2026-11-04T08:06:43.147Z",
+      "finishedAt": "2026-11-04T08:06:45.429Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "remaining-4.log"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/migrate.mjs",
+        "--status"
+      ],
+      "startedAt": "2026-11-04T08:06:45.430Z",
+      "finishedAt": "2026-11-04T08:06:47.744Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "remaining-5.log"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "config",
+        "--quiet"
+      ],
+      "startedAt": "2026-11-04T08:06:47.745Z",
+      "finishedAt": "2026-11-04T08:06:47.870Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "remaining-6.log"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "docker-compose.yml",
+        "-f",
+        "docker-compose.dev.yml",
+        "config",
+        "--quiet"
+      ],
+      "startedAt": "2026-11-04T08:06:47.871Z",
+      "finishedAt": "2026-11-04T08:06:48.001Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "remaining-7.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "audit",
+        "--json"
+      ],
+      "startedAt": "2026-11-04T08:06:48.002Z",
+      "finishedAt": "2026-11-04T08:06:48.726Z",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "log": "remaining-8.log"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/phase3-security-check.mjs"
+      ],
+      "startedAt": "2026-11-04T08:06:48.727Z",
+      "finishedAt": "2026-11-04T08:06:49.217Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "remaining-9.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "startedAt": "2026-11-04T08:06:49.218Z",
+      "finishedAt": "2026-11-04T08:06:49.230Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "remaining-10.log"
+    }
+  ],
+  "finalSource": {
+    "algorithm": "sha256 of sorted Git-visible non-Markdown/non-docs paths and contents",
+    "sha256": "0e0811d877351bda52dbc4be14443438c0659324ada9692c7e31bd4a77e1dd20",
+    "files": 153,
+    "head": "aed850a472feb21dd8f80e6b4e71bf32c9a3c49a"
+  },
+  "containers": "9cf00c5a4074 api running healthy\n2d912c6dd832 mailpit running healthy\nc2ddb4ed2a44 minio running healthy\n124e468ede82 minio-init exited \n1fa243947382 nginx running healthy\na26a763b8e13 postgres running healthy\n39856684bb32 redis running healthy\nb99a9c762714 web running healthy\na41dbec7afa7 worker running healthy\n"
+}

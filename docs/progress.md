@@ -1,6 +1,14 @@
 # SmartRecruit AI progress
 
+**Final independent Session 2 result: PHASE 3 PASS.** Owner reports 46 PASS, 0 FAIL and 2 explicitly nonblocking live-provider verification gaps out of 48 requirements; no local acceptance blockers. Git finalization is authorized. See [final acceptance and dependency risk record](audits/phase-3-final-acceptance.md). Earlier FAIL/pending statements below are historical and superseded by this final result.
+
+**Independent Phase 3 audit: FAIL.** The owner supplied F01–F05 blocking and F06–F07 nonblocking findings (48 reviewed: 24 pass, 4 fail, 20 insufficiently verified). This supersedes the historical local acceptance claims below. Remediation is locally complete with LOCAL PASS; independent re-audit is pending. No independent acceptance is claimed. See [preserved findings](audits/phase-3-independent-findings.md).
+
 ## Current authorization and status
+
+**Phase 3 explicitly authorized by the owner on 2026-10-29.** Jobs, reviewed requirements, immutable rubric versions, asynchronous analysis/drafting, mock/OpenRouter gateway, durable attempts/outbox/usage, and React workflows are implemented locally. `AI_PROVIDER=mock` remains enabled. No live API calls, commits, pushes, merges, or Phase 4 work are authorized. Local verification and audit handoff are recorded in [phase-3-verification.md](phase-3-verification.md); final results are appended below. Independent Phase 3 audit is the next gate. Live model/provider catalog and smoke checks remain pending separate owner approval.
+
+## Historical Phase 2 audit status
 
 **Independent Phase 2 audit: FAIL (27 passed, 2 failed, 1 insufficiently verified of 30). Audit remediation is locally complete: F01–F04 FIXED, F05 UNRESOLVED; independent re-audit pending. Prior developer PASS is superseded.** The owner reports independent Phase 0 and Phase 1 PASS in the current implementation request. Historical audit evidence below is preserved. Branch `phase-2/auth-multitenancy`, baseline `e830a84645f3bfe4a7535d2f023a426d39459c99`, initially clean. No commit/push authorized.
 
@@ -150,3 +158,34 @@ Owner supplied independent FAIL with F01–F05 (two high, three medium; no criti
 F01–F04 FIXED with PostgreSQL, HTTP concurrency and mounted-browser evidence; F05 UNRESOLVED (four inherited moderate MinIO-chain advisories, no safe compatible upstream fix identified). Historical independent FAIL remains authoritative pending re-audit. See [verification](phase-2-verification.md#remediation-outcome-and-exact-evidence) and [advisory assessment](phase-2-advisories.md).
 
 Executed: frozen install, lint, typecheck, build; standard Vitest 31 passed/2 Docker skips, Phase 2 Vitest 5 passed, isolated Phase 2 browser 2 passed, infrastructure browser 1 passed/2 Phase 2 skips, 11 infrastructure checks; five migrations and Prisma validation; Docker image builds and base/dev config; protected-document and secret checks. Audit exits 1 with four moderate vulnerabilities. Initial host Prisma validation lacked DATABASE_URL; container validation passed. No functional test remains failed. No architecture/Phase 1 history changes, commits, pushes or Phase 3 work. Working tree retains uncommitted Phase 2 implementation and remediation. Stop for independent security re-audit and owner authorization.
+
+
+## Phase 3 final developer verification — 2026-10-29
+
+Owner explicitly authorized Phase 3 on the initially clean `phase-3/jobs-rubrics` branch at `aed850a472feb21dd8f80e6b4e71bf32c9a3c49a`. Implemented tenant-scoped jobs/status/archive, reviewed JD evidence, editable and database-immutable approved rubric versions, versioned strict AI contracts, deterministic mock and restricted OpenRouter providers, asynchronous worker/outbox recovery, per-attempt usage and token/cost reservations, and integrated React workflows. Four additive migrations preserve existing records and enforce tenant/job/artifact relationships; final runtime schema revision 4 requires the complete Phase 3 schema. The approved Phase 0 specification/design documents remain unchanged.
+
+Local verification passed: frozen install, build, lint, typecheck, Prisma generation/validation and nine-migration status, base/dev Compose config, API/worker/web builds/startup, 41 default Vitest tests (3 explicit Docker skips), 11 Phase 3 tests, 5 Phase 2 tests, 1 Phase 3 browser flow, 2 Phase 2 browser regressions, 1 infrastructure browser test, and all 11 infrastructure checks. Service suites overlap the default unit tests; counts are not additive. Database tests prove tenant/role denial, invalid-weight rejection, immutable approved records, concurrent approval/version protection, cross-job artifact rejection, duplicate/crash/Redis-loss recovery, bounded failures, stale-result fencing and budget denial. Browser save/approve sequencing and raw-JD whitespace citation issues were repaired with assertions retained/added. A Phase 3 ownership assertion replaces obsolete placeholder ownership for the newly implemented module READMEs.
+
+The final base stack has eight healthy running services and a successful initializer; isolated Phase 3 databases were removed. Secret/log/browser-bundle checks, source-document preservation, whitespace and documentation links passed. `AI_PROVIDER=mock` is confirmed in the local file and API/worker containers. No real API call, key disclosure, commit, push or merge occurred.
+
+`pnpm audit --json` still fails with four inherited moderate MinIO-chain advisories and no low/high/critical findings. No advisory is suppressed. Live catalog/model/provider/privacy verification and paid synthetic smoke remain pending separate explicit approval; neither is reported as passing. Exact private environment variables, approval-gated commands, dated unverified route matrix, implementation decisions/limits, changed paths and executed evidence are in [phase-3-verification.md](phase-3-verification.md); the actual dependency snapshot is [phase-3-dependency-audit.json](audits/phase-3-dependency-audit.json).
+
+**Local mock-mode Phase 3 acceptance PASS, subject to independent audit; live integration acceptance pending approval. STOP for the independent Phase 3 audit.** No Phase 4 or production release is authorized. Prior independent Phase 2 findings remain historical evidence, with inherited dependency concern F05 still unresolved.
+
+
+## Phase 3 audit remediation — 2026-10-29
+
+**PHASE 3 REMEDIATION: LOCAL PASS; independent FAIL awaits Session 2 re-audit.** F01 editor revision snapshots/conflicts, F02 paginated immutable history, F03 durable authorized approval replay, F04 cache/generation accounting and settlement fencing, and F05 direct concurrent/recovery verification are complete locally. Migration 007 is applied; schema readiness is 5. No Phase 0 architecture document changed.
+
+Fresh verification: Phase 3 13 tests (including 17 additional real-service audit scenarios), mounted Phase 3 browser 3, Phase 2 security 5, Phase 2 browser 2, infrastructure 11 checks, default Vitest 42 with 4 opt-in skips, default browser 1 with 5 opt-in skips. Opt-in suites executed all those skips. Lint, typecheck, build, frozen install, Prisma/migrations, Compose and secret/spec checks passed. Dependency audit exit 1 remains four inherited moderate advisories (F06); live OpenRouter remains unverified (F07). Full matrix, exact commands/exits, source/image/database identities, failure history and reproduction instructions are in [the remediation report](phase-3-verification.md#audit-remediation--current-evidence-2026-10-29).
+
+`AI_PROVIDER=mock` is retained, no live provider calls occurred, no commit/push/merge occurred. Stop here for independent re-audit; no Phase 4 work authorized.
+
+
+## Phase 3 F08 remediation — completed 2026-11-04
+
+The owner reports the second independent audit returned FAIL with F01–F05 FIXED and F08 the remaining blocker. **PHASE 3 F08 REMEDIATION: LOCAL PASS; independent re-audit pending.** Job navigation/creation now clears old rubric editors, rendering and submission enforce current ownership, and delayed reload/save completions cannot replace or clear another session. F01 revision snapshots/conflict handling remain intact. No backend/schema/shared-navigation changes were made.
+
+F08 source fingerprint `0e0811d877351bda52dbc4be14443438c0659324ada9692c7e31bd4a77e1dd20` is unchanged from October 29 through resumed November 4 completion. Phase 3 browser 4 passed, Phase 3 service/contracts 13 passed (including 17 audit scenarios), Phase 2 service 5 passed, default Vitest 42 passed/4 opt-in skips. The Phase 2 browser shared-Redis runs failed; counters exceeded the unchanged authentication rate limit. The same assertions passed 2/2 with disposable authenticated Redis. Infrastructure 11 checks and default browser 1 passed/6 opt-in skips; explicit suites exercised all skips. Lint/typecheck/build, migrations, Compose, secret/spec checks passed. Full command/exits, failure history, isolation harness and evidence are in [the verification report](phase-3-verification.md).
+
+F07 remains mock-only/live-unverified. F06's original risk record is preserved, but the fresh dependency audit reports **5 moderate and 1 high** advisories, including two additions outside the earlier risk decision; separate dependency/security review is required. F08 local acceptance does not claim dependency clearance or production readiness. No commit/push/merge, paid call, Phase 4 work, or approved Phase 0 document change. Stop for independent re-audit.

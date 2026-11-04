@@ -19,7 +19,9 @@
     "db:migrate": "node scripts/migrate.mjs",
     "test:watch": "pnpm build && vitest",
     "test:phase2": "PHASE2_DATABASE_TESTS=1 PHASE2_AUTH_TESTS=1 PHASE2_TENANT_TESTS=1 PHASE2_NOTIFICATION_TESTS=1 vitest run tests/phase2",
-    "test:phase2:e2e": "node scripts/phase2-browser.mjs"
+    "test:phase2:e2e": "node scripts/phase2-browser.mjs",
+    "test:phase3": "PHASE3_INTEGRATION=1 vitest run tests/phase3",
+    "test:phase3:e2e": "node scripts/phase3-browser.mjs"
   },
   "devDependencies": {
     "@eslint/js": "10.0.1",

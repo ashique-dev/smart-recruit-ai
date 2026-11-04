@@ -1,0 +1,254 @@
+{
+  "startedAt": "2026-10-29T09:31:06.583Z",
+  "source": {
+    "algorithm": "sha256 of sorted Git-visible non-Markdown/non-docs paths and contents",
+    "sha256": "357d96b662409ce6be31a2637b3b512bf627d27d7b7186e141558640b47617dc",
+    "files": 153,
+    "head": "aed850a472feb21dd8f80e6b4e71bf32c9a3c49a"
+  },
+  "images": [
+    "sha256:2e1d0af4a3a8bd45c2cb18fa7f1136f9c8934c6d6e6586272a6b0ed1f25fb13d",
+    "sha256:c0d0aa558371acf23a6d6884a8b8ea05aff404ba4d96ff80fa769163df8920a9",
+    "sha256:42c11a913b8f6cf7fb04c35faed60d3961a56278411b22f0ae1aba627efcb47f"
+  ],
+  "commands": [
+    {
+      "command": [
+        "pnpm",
+        "install",
+        "--frozen-lockfile"
+      ],
+      "startedAt": "2026-10-29T09:31:06.681Z",
+      "finishedAt": "2026-10-29T09:31:07.390Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/01-pnpm.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "lint"
+      ],
+      "startedAt": "2026-10-29T09:31:07.390Z",
+      "finishedAt": "2026-10-29T09:31:08.845Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/02-pnpm.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "typecheck"
+      ],
+      "startedAt": "2026-10-29T09:31:08.845Z",
+      "finishedAt": "2026-10-29T09:31:13.666Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/03-pnpm.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "build"
+      ],
+      "startedAt": "2026-10-29T09:31:13.666Z",
+      "finishedAt": "2026-10-29T09:31:20.568Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/04-pnpm.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "exec",
+        "vitest",
+        "run"
+      ],
+      "startedAt": "2026-10-29T09:31:20.568Z",
+      "finishedAt": "2026-10-29T09:31:21.734Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/05-pnpm.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "test:phase3"
+      ],
+      "startedAt": "2026-10-29T09:31:21.734Z",
+      "finishedAt": "2026-10-29T09:31:42.959Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/06-pnpm.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "test:phase2"
+      ],
+      "startedAt": "2026-10-29T09:31:42.960Z",
+      "finishedAt": "2026-10-29T09:32:03.549Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/07-pnpm.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "test:phase3:e2e"
+      ],
+      "startedAt": "2026-10-29T09:32:03.549Z",
+      "finishedAt": "2026-10-29T09:33:06.621Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/08-pnpm.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "test:phase2:e2e"
+      ],
+      "startedAt": "2026-10-29T09:33:06.621Z",
+      "finishedAt": "2026-10-29T09:34:22.496Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/09-pnpm.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "test:infrastructure"
+      ],
+      "startedAt": "2026-10-29T09:34:22.496Z",
+      "finishedAt": "2026-10-29T09:35:07.919Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/10-pnpm.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "test:e2e"
+      ],
+      "startedAt": "2026-10-29T09:35:07.920Z",
+      "finishedAt": "2026-10-29T09:35:09.434Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/11-pnpm.log"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "run",
+        "--rm",
+        "--no-deps",
+        "api",
+        "pnpm",
+        "exec",
+        "prisma",
+        "validate"
+      ],
+      "startedAt": "2026-10-29T09:35:09.434Z",
+      "finishedAt": "2026-10-29T09:35:11.430Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/12-docker.log"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/migrate.mjs",
+        "--status"
+      ],
+      "startedAt": "2026-10-29T09:35:11.430Z",
+      "finishedAt": "2026-10-29T09:35:13.337Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/13-node.log"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "config",
+        "--quiet"
+      ],
+      "startedAt": "2026-10-29T09:35:13.337Z",
+      "finishedAt": "2026-10-29T09:35:13.448Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/14-docker.log"
+    },
+    {
+      "command": [
+        "docker",
+        "compose",
+        "-f",
+        "docker-compose.yml",
+        "-f",
+        "docker-compose.dev.yml",
+        "config",
+        "--quiet"
+      ],
+      "startedAt": "2026-10-29T09:35:13.448Z",
+      "finishedAt": "2026-10-29T09:35:13.531Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/15-docker.log"
+    },
+    {
+      "command": [
+        "pnpm",
+        "audit",
+        "--json"
+      ],
+      "startedAt": "2026-10-29T09:35:13.532Z",
+      "finishedAt": "2026-10-29T09:35:14.220Z",
+      "exitCode": 1,
+      "expectedExitCode": 1,
+      "log": "run-2026-10-29T09-31-06.582Z/16-pnpm.log"
+    },
+    {
+      "command": [
+        "node",
+        "scripts/phase3-security-check.mjs"
+      ],
+      "startedAt": "2026-10-29T09:35:14.221Z",
+      "finishedAt": "2026-10-29T09:35:14.687Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/17-node.log"
+    },
+    {
+      "command": [
+        "git",
+        "diff",
+        "--check"
+      ],
+      "startedAt": "2026-10-29T09:35:14.687Z",
+      "finishedAt": "2026-10-29T09:35:14.695Z",
+      "exitCode": 0,
+      "expectedExitCode": 0,
+      "log": "run-2026-10-29T09-31-06.582Z/18-git.log"
+    }
+  ],
+  "finishedAt": "2026-10-29T09:35:14.695Z",
+  "finalSource": {
+    "algorithm": "sha256 of sorted Git-visible non-Markdown/non-docs paths and contents",
+    "sha256": "357d96b662409ce6be31a2637b3b512bf627d27d7b7186e141558640b47617dc",
+    "files": 153,
+    "head": "aed850a472feb21dd8f80e6b4e71bf32c9a3c49a"
+  },
+  "containers": [
+    "44dcc512e715 api running healthy",
+    "2d912c6dd832 mailpit running healthy",
+    "c2ddb4ed2a44 minio running healthy",
+    "124e468ede82 minio-init exited ",
+    "aba8e4658b4e nginx running healthy",
+    "a26a763b8e13 postgres running healthy",
+    "39856684bb32 redis running healthy",
+    "5f6a53e987f8 web running healthy",
+    "9dfe0e59e6f1 worker running healthy"
+  ]
+}

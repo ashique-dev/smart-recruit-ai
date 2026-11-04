@@ -18,6 +18,10 @@
     "./security": {
       "types": "./dist/auth/security.d.ts",
       "default": "./dist/auth/security.js"
+    },
+    "./ai-runtime": {
+      "types": "./dist/ai-gateway/runtime.d.ts",
+      "default": "./dist/ai-gateway/runtime.js"
     }
   },
   "files": [
@@ -55,7 +59,8 @@
     "reflect-metadata": "0.2.2",
     "rxjs": "7.8.2",
     "socket.io": "4.8.4",
-    "zod": "4.6.7"
+    "zod": "4.6.7",
+    "@smart-recruit/ai-contracts": "workspace:*"
   },
   "devDependencies": {
     "@types/express": "5.0.6",

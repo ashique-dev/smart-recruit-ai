@@ -1,6 +1,6 @@
 # SmartRecruit AI
 
-Phase 2 adds secure staff authentication, company workspaces and roles, team invitations, password reset, and durable SMTP notifications to the verified Phase 1 infrastructure. Recruitment and AI inference are not implemented. Phase 2 developer verification is recorded in [docs/phase-2-verification.md](docs/phase-2-verification.md); independent security approval is still required. The approved design is in [docs/architecture.md](docs/architecture.md); verification evidence is in [docs/progress.md](docs/progress.md).
+Phase 3 adds tenant-scoped jobs, versioned rubric review/approval, asynchronous AI drafting and a server-only mock/OpenRouter gateway to the existing authentication/workspace/notification foundation. Local development remains in explicit mock mode; real provider calls require separate approval. See [Phase 3 verification](docs/phase-3-verification.md) for acceptance evidence, secure live configuration and remaining gates. The approved design is in [docs/architecture.md](docs/architecture.md); current status and historical audits are in [docs/progress.md](docs/progress.md).
 
 ## Prerequisites
 
@@ -149,3 +149,22 @@ pnpm audit --json        # four inherited moderate advisories remain unsuppresse
 ```
 
 Phase 2 integration tests create uniquely named disposable databases and queue namespaces, never truncate development tables, and remove their synthetic Mailpit messages. The browser wrapper temporarily restarts API/worker/web/Nginx, so run locally without concurrent use. It restores the ordinary stack and drops only its generated database in `finally`. No candidate data is used. Default tests deliberately skip Docker-dependent suites; an explicit Phase 2 test command is required for acceptance.
+
+## Phase 3 — jobs, rubric approval and AI drafting
+
+Select a workspace to open Jobs. Admins/recruiters create and edit jobs, analyze the description, review exact-quote requirements, draft/edit rubrics, approve weights totaling 10,000 basis points, and copy approved rubrics to new versions. Viewers have read access. Status actions enforce the documented transition graph; archive preserves history. AI requests run in the independent worker and show durable status/failure codes.
+
+Keep `AI_PROVIDER=mock`. Both providers are implemented, but **no OpenRouter catalog or inference call is authorized or performed automatically**. Secure environment setup, opt-in scripts, route-verification requirements, decisions and test evidence are in [Phase 3 verification](docs/phase-3-verification.md).
+
+```sh
+pnpm install --frozen-lockfile
+pnpm build
+# BUILDX_CONFIG=/tmp/smart-recruit-buildx may be used if the Docker config directory is read-only.
+docker compose build api worker web
+pnpm db:migrate
+docker compose up -d --wait
+pnpm test:phase3
+pnpm test:phase3:e2e
+```
+
+Phase 3 integration/browser tests use uniquely named databases and mock AI. The browser wrapper temporarily restarts local application services, restores the base stack, and drops only its generated database. Run it without other interactive use of the local stack. Independent Session 2 returned Phase 3 PASS for mock-mode local acceptance: 46 PASS, 0 FAIL, 2 explicitly nonblocking live-provider gaps. See [final acceptance and dependency risks](docs/audits/phase-3-final-acceptance.md). No later phase is authorized by this documentation.

@@ -1,0 +1,103 @@
+{
+  "checkedAt": "2026-11-04T08:09:00.111Z",
+  "branch": "phase-3/jobs-rubrics",
+  "head": "aed850a472feb21dd8f80e6b4e71bf32c9a3c49a",
+  "source": {
+    "algorithm": "sha256 of sorted Git-visible non-Markdown/non-docs paths and contents",
+    "sha256": "0e0811d877351bda52dbc4be14443438c0659324ada9692c7e31bd4a77e1dd20",
+    "files": 153,
+    "head": "aed850a472feb21dd8f80e6b4e71bf32c9a3c49a"
+  },
+  "checks": {
+    "evidenceConfiguredSecrets": "PASS",
+    "lintAfterEvidenceScripts": 0,
+    "postDocumentationDiffCheck": 0,
+    "postDocumentationSecurityCheck": 0
+  },
+  "evidenceFiles": [
+    {
+      "path": "docs/audits/phase-3-f08-evidence/final-lint.log",
+      "sha256": "096ab9aca9fa5467e45d531639c980ad021d5b5e91e197522fbf221baf876e8b"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/finish-verification.mjs",
+      "sha256": "d2072cd99a71489b4b84687f49f07740d1c6945c94ea14c679f2b87d9ef83781"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/initial-browser.log",
+      "sha256": "156a41acee2b25f8134d791051baf52ec5184bce930c1eb9ab76f387d7b27b74"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/initial-build.log",
+      "sha256": "3363d1d00a5bdd55d2c9fe43e8e4bc3972f73eb86a40cb770a37012f8a87638d"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/integration.json",
+      "sha256": "5f8c421ee3f03d7297f5586532008c365d03030b98baf3a98549c12de9f9ca72"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/phase2-initial-timeout.md",
+      "sha256": "b4b03c889bfd91233d90fe564c34b7ed52b012a2e6e1b47e9912a0c2fde8fa8f"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/phase2-isolated-browser.mjs",
+      "sha256": "7f5a9b17721550ab2d41f03a340c54dd21d4f4149faf30b84e4922a68a135b45"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/phase2-shared-redis-rerun.log",
+      "sha256": "6069874a8d4329baec3a09a422f151cdbe3119d0d7752b89218dbce9722439f6"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-1.log",
+      "sha256": "71f13bff4c033c2ca911bf621f98c6f32d7be85ed7981ef9853f0a6f29d37b53"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-10.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-2.log",
+      "sha256": "ea954893291d7cca1a8ad8540971f90cbe0b475363bfaf5b1ba0a166c7e7fcee"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-3.log",
+      "sha256": "131f8b259f676d713ee9b1ca0675316852cab741188c785c9db2c66248e74af9"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-4.log",
+      "sha256": "0b1c2ceca6d8adb236a5bd025ffcf6dd06e86381b1ce4f536d8891015eb4c43c"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-5.log",
+      "sha256": "6b903aa25fecf4323e905166e17a228862a59029415b5d4e93ea0918f4d9343c"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-6.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-7.log",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-8.log",
+      "sha256": "8730e57e362d786987f02814b508202b235d0f2884b33d1182162d89ea1da739"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-9.log",
+      "sha256": "446207f899f0e214f318e051e14d69f9fcccae1c58ef42ebc64d526371dfc909"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/remaining-commands.json",
+      "sha256": "9a9287b8f9154c5e407d84249121ddc2695dd19b8db587956c39c49226f3306f"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/resume-stack.log",
+      "sha256": "457dabf06e4a3ab4039464934700232bb3f0398dc56b8b0ad29c8f35607591f6"
+    },
+    {
+      "path": "docs/audits/phase-3-f08-evidence/web-image-build.log",
+      "sha256": "e447f7f530d092473b5000e5a2fa860d63fcf5dbc7b18ea5b9f89d43d2c4c91d"
+    }
+  ]
+}
