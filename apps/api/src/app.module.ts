@@ -1,3 +1,5 @@
+import { JobsController } from './jobs/jobs.controller';
+import { JobsService } from './jobs/jobs.service';
 import { InvitationController, AcceptanceController } from './memberships/invitation.controller';
 import { InvitationService } from './memberships/invitation.service';
 import { CompanyController } from './companies/company.controller';
@@ -10,5 +12,5 @@ import { Infrastructure } from './common/infrastructure';
 import { Module } from '@nestjs/common';
 import { HealthController } from './common/health.controller';
 import { InfrastructureGateway } from './common/infrastructure.gateway';
-@Module({ controllers: [HealthController, AuthController, CompanyController, InvitationController, AcceptanceController], providers: [InfrastructureGateway, Infrastructure, Security, AuthService, AuthGuard, CsrfGuard, AuthRateGuard, CompanyService, InvitationService] })
+@Module({ controllers: [JobsController, HealthController, AuthController, CompanyController, InvitationController, AcceptanceController], providers: [JobsService, InfrastructureGateway, Infrastructure, Security, AuthService, AuthGuard, CsrfGuard, AuthRateGuard, CompanyService, InvitationService] })
 export class AppModule {}

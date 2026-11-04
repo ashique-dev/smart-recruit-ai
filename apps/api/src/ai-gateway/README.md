@@ -1,3 +1,3 @@
-# ai-gateway
+# AI gateway
 
-Reserved module boundary from the approved architecture. No feature is implemented here in Phase 1; implementation requires authorization for its owning phase.
+Phase 3 central server-only mock/OpenRouter gateway and independent worker runtime. Contracts live in packages/ai-contracts. AiProcessor owns persisted attempts, budget reservations, retries, lease fencing, usage and atomic artifact/draft publication. AiRuntime polls the existing PostgreSQL outbox and reconciles Redis loss. Real mode requires verified routes; no startup or health probe makes an external call. See docs/phase-3-verification.md before any live integration test.

@@ -1,3 +1,4 @@
+import { AiProcessor, AiRuntime } from '@smart-recruit/api/ai-runtime';
 import { Notifications } from '@smart-recruit/api/notifications';
 import { NotificationRuntime } from '@smart-recruit/api/notification-runtime';
 import { Security } from '@smart-recruit/api/security';
@@ -18,11 +19,11 @@ class WorkerRuntime implements OnModuleInit, OnModuleDestroy {
   private stopping = false;
   private readonly server = createServer((request, response) => {
     if (request.url !== '/health/live' && request.url !== '/health/ready') { response.writeHead(404).end(); return; }
-    const ready = !this.stopping && Date.now() - this.heartbeatAt < 20000 && Boolean(this.worker?.isRunning()) && this.notifications.isReady();
+    const ready = !this.stopping && Date.now() - this.heartbeatAt < 20000 && Boolean(this.worker?.isRunning()) && this.notifications.isReady() && this.ai.isReady();
     response.writeHead(request.url === '/health/live' || ready ? 200 : 503, { 'content-type': 'application/json' });
     response.end(JSON.stringify({ status: request.url === '/health/live' || ready ? 'ok' : 'unavailable' }));
   });
-  constructor(private readonly infrastructure: Infrastructure, private readonly notifications: NotificationRuntime) {}
+  constructor(private readonly infrastructure: Infrastructure, private readonly notifications: NotificationRuntime, private readonly ai: AiRuntime) {}
   async onModuleInit() {
     this.worker = new Worker(smokeQueue, processSmoke, { connection: redisOptions(this.infrastructure.env.REDIS_URL), concurrency: 1 });
     this.worker.on('error', () => logger.warn({ event: 'queue_connection_error' }));
@@ -50,7 +51,7 @@ class WorkerRuntime implements OnModuleInit, OnModuleDestroy {
     clearTimeout(deadline);
   }
 }
-@Module({ providers: [Infrastructure, Security, Notifications, NotificationRuntime, WorkerRuntime] })
+@Module({ providers: [AiProcessor, AiRuntime, Infrastructure, Security, Notifications, NotificationRuntime, WorkerRuntime] })
 class WorkerModule {}
 NestFactory.createApplicationContext(WorkerModule, { logger }).then(app => app.enableShutdownHooks())
   .catch(() => { logger.error({ event: 'worker_start_failed' }); process.exitCode = 1; });

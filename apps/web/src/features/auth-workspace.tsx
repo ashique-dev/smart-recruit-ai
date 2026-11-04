@@ -1,3 +1,4 @@
+import { Jobs } from './jobs';
 import { authorizationSnapshot, subscribeAuthorization, recheckCompany } from '@/services/authorization';
 import { useEffect, useState, useSyncExternalStore } from 'react';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
@@ -79,6 +80,7 @@ export function WorkspacePage() {
   {!companyId&&<section><h2 className="text-xl">Create another workspace</h2><Form fields={[{name:'name',label:'Workspace name'}]} schema={z.object({name})} label="Create workspace" submit={async values=>{const result=await api<{id:string}>('companies',values);await invalidate();navigate(`/workspace/${result.id}`);}}/></section>}
   {!companyAllowed&&companyId&&<p role="alert">Workspace access changed. Select a workspace to recheck your access.</p>}
   {companyAllowed&&company.data&&<section><h2 className="text-xl">{company.data.name}</h2><p>Your role: {company.data.role}</p>{!admin&&<p>Workspace access is active. Team and settings administration require a company admin.</p>}</section>}
+  {companyAllowed&&company.data&&<Jobs key={companyId} companyId={companyId!} canWrite={company.data.role!=='VIEWER'}/> }
   {admin&&<>
    <section><h2 className="mt-6 text-xl">Workspace settings</h2><Form key={`${companyId}-${company.data?.revision}`} fields={[{name:'name',label:'Company name'}]} initial={{name:company.data!.name}} schema={z.object({name})} label="Save company name" submit={async values=>{await api(`companies/${companyId}/settings`,{...values,revision:company.data!.revision});await invalidate();}}/></section>
    <section><h2 className="mt-6 text-xl">Invite a team member</h2><Form fields={[{name:'email',label:'Invite email',type:'email'},{name:'role',label:'Invitation role',options:roles}]} schema={z.object({email,role:z.enum(roles)})} initial={{role:'VIEWER'}} label="Send invitation" submit={async values=>{await api(`companies/${companyId}/invitations`,{...values,idempotencyKey:crypto.randomUUID()});await invalidate();}}/></section>
