@@ -8,3 +8,4 @@ apps/api/generated/
 coverage/
 test-results/
 playwright-report/
+.verification/

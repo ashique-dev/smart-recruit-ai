@@ -1,0 +1,1497 @@
+{
+  "decision": "READY FOR TARGETED INDEPENDENT RE-AUDIT",
+  "independentAudit": "GA-F03 NOT SUFFICIENTLY VERIFIED; developer execution is not independent acceptance",
+  "head": "84c90acfca3f4655698a5f708e0394581e56efc9",
+  "branch": "verification/openrouter-live",
+  "broker": {
+    "runId": "bc4f42db-8870-45f6-804a-7abad444550d",
+    "scope": "full",
+    "head": "84c90acfca3f4655698a5f708e0394581e56efc9",
+    "build": {
+      "files": {
+        "broker.mjs": "eb0bce2082216a84ad1928b7f081a8f666648d0839ba176aab0aa8a8e43713d3",
+        "broker-policy.mjs": "9bdfed85d679121132bb2e6defd36fedad7cd5bc6e1a5d0c92a88e91cf8dd98f",
+        "limit.mjs": "7eb89fe9562707a6aec6a5d33c2fce4121b7108dbb0ec10a4c292bc82e41060a",
+        "ipc-transport.mjs": "cb3001ec1576fe66117834beea0f5207018307142dac458589b7e30560eacc96",
+        "provider-substitute.mjs": "f45cb007b6809d20b13f4bfe3262b7a8634364564d6db5b3cbbb696ab910cd73",
+        "fixture.mjs": "14dabb4c4e47f6bc7d3b5c9e2004c8f1974d95f84b55f7589ce694813d5b7159",
+        "broker-workflow.mjs": "806f079b31bdff6062119ceb4f548cf506d2788a24451213aaec027716326231",
+        "broker-client.mjs": "85c93661ca38b59d462ab93721c21e2d91dd29eda4817f9ffeceb4297fae6141"
+      },
+      "sourceDigest": "540562f7d703c2bbdef69e429a8b70ed44e853b67b547ae57d8a2afeaa295029",
+      "applicationImage": "sha256:80e6876ee9c2e800115bfdee11f61440e36196addb0c639e55fd6c7548b48ddc",
+      "image": "sha256:4c69ceec7ce29fd483bc8b395d8efa85982f002608c8aa1db0256c62f1864d8d",
+      "head": "84c90acfca3f4655698a5f708e0394581e56efc9",
+      "applicationProvenance": {
+        "command": "DOCKER_BUILDKIT=0 docker build (explicit staged context; see manifest)",
+        "exitCode": 0,
+        "head": "84c90acfca3f4655698a5f708e0394581e56efc9",
+        "contextDigest": "8df580ab727983ee1a71cc2364b8df6371e9432cb23867661367d94a33b1bd57",
+        "sourceHashes": {
+          ".dockerignore": "bbbd36fe05c3f57dcd2b5579c88677d32431de599a419e6af42510cc5badef1d",
+          ".npmrc": "7e142e575a926f0728ed23b0af36a6592b6f5b81a7629d906da4fde946a01d09",
+          "apps/api/Dockerfile": "19bc68cf576a12de50c1c915df8c6d12360d1d190737a01050e424bb92927d04",
+          "apps/api/package.json": "92424b929e0af168c6ed87ec057a154956735fc35415976691cd4a474997bc11",
+          "apps/api/prisma/migrations/20261027000100_infrastructure/migration.sql": "531d4adffa2381df7f734366c8113a0b70d4f2b538266f91db57e63b0b6c66a9",
+          "apps/api/prisma/migrations/20261027000200_infrastructure_permissions/migration.sql": "3be52b8e8b55f8dcb75b0cb93a59af58fef4f036d70f80da34c034a735080eab",
+          "apps/api/prisma/migrations/20261028000100_auth_tenancy/migration.sql": "2672faafa3d460901745dffc9c8b0c981636c0e6ebab278d563c8fe84abea6e7",
+          "apps/api/prisma/migrations/20261028000200_auth_schema_version/migration.sql": "6bcbb162966ee6008c3d9bc351bfc704472394bbc6c5e70f8e6969565c026467",
+          "apps/api/prisma/migrations/20261028000300_notification_expiry_indexes/migration.sql": "0aeec47162066f63c067105644dca9854547e038bbe16d5c8d0c9c896d585176",
+          "apps/api/prisma/migrations/202610290003_phase3_jobs_ai/migration.sql": "34f5508b9d6115cf85fbc7a8c1713108458196913a6b7180102bb6aa94cebd1e",
+          "apps/api/prisma/migrations/202610290004_phase3_accounting/migration.sql": "e5a7391878510f7a69d551cd494ee686e3f22a13aa41288cf842c7880aa1f896",
+          "apps/api/prisma/migrations/202610290005_phase3_artifact_alignment/migration.sql": "bed650b24f5b4fc85bfeb0198b05188166e5a03655d08a9cbeb744fb9a22444d",
+          "apps/api/prisma/migrations/202610290006_phase3_readiness/migration.sql": "dab3fa1e1113afed09a5a648b9422118aeb0a9b1bc41706f5bc35b19b84b17c7",
+          "apps/api/prisma/migrations/202610290007_phase3_audit_remediation/migration.sql": "f30eecc36125f7d76b2f2407857329f5d90b258f1b356712d12dafe25e03dc52",
+          "apps/api/prisma/migrations/migration_lock.toml": "1db17a8d051aa136110736752c5e1f8b7ed92b6ea8e803112fbbe2497047c210",
+          "apps/api/prisma/schema.prisma": "7ea504332d04d9e2bebf1284729862671370a4aec33e80181eee9cbe4e31f806",
+          "apps/api/src/ai-gateway/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/ai-gateway/README.md": "e761b55af1191cc221510d5528fd5799596ef0f06042330ec1d71338990dfd30",
+          "apps/api/src/ai-gateway/gateway.ts": "31eb6d32db431e1de4cc863db7491d9e36a704944d6f93c6c1779d99ccd85225",
+          "apps/api/src/ai-gateway/runtime.ts": "c74c07bde046376e410f2fa35b067c5fd99af2132aa56931d6320e36ab709e66",
+          "apps/api/src/app.module.ts": "d887f18341a6d4abd67f5863a3c52bc99a52c62a529d1a96708d9e6e9e818828",
+          "apps/api/src/audit/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/audit/README.md": "cbafb3800ac0d51947a0f72a98e8dec65ac12338e4f8e563851d2c73185c22a6",
+          "apps/api/src/auth/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/auth/README.md": "3fa5c00c289199ff6fed9e18822a2ddfb51ceece644785bdf4af0383b34dcccb",
+          "apps/api/src/auth/auth.controller.ts": "5ca1b37f9ed039e410058e2f3bde1ace006211d608aef7bc360ac5b9b279fa87",
+          "apps/api/src/auth/auth.service.ts": "b908212f5e8f4807c14d9a8eeacd974e2fbb15402aa084eb22bfa414041dc69e",
+          "apps/api/src/auth/dto.ts": "eb642b5034cf6200cff601161ef37d89fe30699dde26e4b49032cc2c7f43597e",
+          "apps/api/src/auth/guards.ts": "2d3a624552834b293efd37efdb1bd9ae11e1546324921a44e2622ac5df20772b",
+          "apps/api/src/auth/security.ts": "8a258023b27918d2fbb78e1939451fe2be04162b9d12f61079263a90c39c41b9",
+          "apps/api/src/candidate-rankings/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/candidate-rankings/README.md": "1c25190b5ee5c66c7b56222e09d92adbbde58f9953279121946e85f6e3f37916",
+          "apps/api/src/candidates/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/candidates/README.md": "4bc9edb0022a097d971ddfadef5e8de5eda3f17ec6c99c2c5363b6c397a457ad",
+          "apps/api/src/common/health.controller.ts": "e65996dbcdc19b18cd7d6efb53bf3bf6672523dee3900c06ec4e15b238ede914",
+          "apps/api/src/common/infrastructure.gateway.ts": "0a288faccac9a9393727a5ddd7aa108e2e0124f58a066fa721fc31ac9fc20201",
+          "apps/api/src/common/infrastructure.ts": "d628ca149e988731fd0ea56d7caacfde795445096260ed366ce91c729b93ef07",
+          "apps/api/src/common/logger.ts": "c5480536831dff6514babbaaedaff865bff1bd70a8c3daf413334119a806a4a8",
+          "apps/api/src/common/pagination.ts": "04935ec27d3a7e1da54be06d509f67ee1b638dc45cf6c71125ee600215567858",
+          "apps/api/src/common/safe-errors.ts": "8ecebf589b249385a81eefd2e485d4f06b0639dd5056642dbd6b1a6664fe77ef",
+          "apps/api/src/common/socket.adapter.ts": "ab26bb2ad54f6434a5f133a5cae2f078a56952d97dd4fae0d0449717d64f86de",
+          "apps/api/src/companies/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/companies/README.md": "fee748c0dfbb738c124f14c85408fa4446eb8cf71bade018be56a7fd34f53a43",
+          "apps/api/src/companies/company.controller.ts": "47f2f00ae1cbccd5d9c87d48e42a12dca60e3fc3888a12ec5a02e84a51f57a23",
+          "apps/api/src/companies/company.service.ts": "a2701a83bda3d2792701c2eac6c6a418a246a39326e9b84b10f456d1bc0fbb9a",
+          "apps/api/src/interview-assessments/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/interview-assessments/README.md": "3371f19f47008840922d511831b9dcf32e83d1775ad5a380139f392b4c8024db",
+          "apps/api/src/interview-engine/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/interview-engine/README.md": "af07aa07f2ef000293e5ac586244f4bd9f25687a2f1f8953900247f9379480c4",
+          "apps/api/src/interview-invitations/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/interview-invitations/README.md": "dd0b701aee71dd60791cfda4df5daec6eaa9b00bf6db218a879a42c042f66ff9",
+          "apps/api/src/interview-sessions/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/interview-sessions/README.md": "bb80f3f82d0b8ee911e8adcb670c2f86c43c4207fa6b32e8dc084275f5b7bc04",
+          "apps/api/src/jobs/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/jobs/README.md": "1c4ed4cc76f625d7bab8ce11c18a80306fb4328551270c1670efa00fbafea01c",
+          "apps/api/src/jobs/jobs.controller.ts": "e018c15e7fadf8093f78a2f8ad2ac4fa4e12e94cd25d14c67e70d9d1fe7aaff7",
+          "apps/api/src/jobs/jobs.service.ts": "c30414fdd853612a9857d682a6502183e732e6dc7bf0bf82b0a671b3fb350e27",
+          "apps/api/src/main.ts": "c5c87855dbebad3e7eba05484203c56d38433b3f0891349ef3f51e92faf72a1e",
+          "apps/api/src/memberships/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/memberships/README.md": "42b6cb22d66044f6d0aa72c93f5e337d4f949deb4c1ee218b6758e3d6949e682",
+          "apps/api/src/memberships/invitation.controller.ts": "f0f5f509ee2bb3a6024774c06aaa61e7410abc1407d485a8f231d696998658a5",
+          "apps/api/src/memberships/invitation.service.ts": "4b038f6d5051b019e56b8b5b04fe42aa2c65f60c7b48cffa16f2cee9158edcb3",
+          "apps/api/src/notifications/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/notifications/README.md": "a3cc5682185789e65e3fe576977d9b54735b27b561b6508465ec8b6fbf8b562e",
+          "apps/api/src/notifications/notifications.ts": "9f6262ab9168427eab2d25e689728737f13e923b581b375b86fe2d4f563b7648",
+          "apps/api/src/notifications/runtime.ts": "0516d260728ffe1f7488c404ddf0d98dc24c98d7fbaa4fe79e2f1dd723678c33",
+          "apps/api/src/resume-assessments/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/resume-assessments/README.md": "c6768a728ee7ad1e0c8e9eaf950c0d975655014707ff74e1c879911fd4c46a36",
+          "apps/api/src/resumes/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/resumes/README.md": "14814f7033f77adbea27cc63df169092988838ffc2eb17358ca4baa93704751c",
+          "apps/api/src/storage/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/storage/README.md": "5ddb17a96c341d709fa11aacb337e213dac4d7dea1296c67751df72db533e4e1",
+          "apps/api/src/usage/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/api/src/usage/README.md": "bfbd7585fc477932fdf9ef87b3ade8b1be9895a186f7e75df0aac5c81da12a11",
+          "apps/api/tsconfig.json": "8362482b1b200dbceea41ab7d28cefcddae11f3e796d82ceb8f62a3f97a8b031",
+          "apps/web/Dockerfile": "0fb79a50ba77c6ae0400de1bd91d01c2c50b82510dd0b9f997472d24ebfb95de",
+          "apps/web/components.json": "fbf10df4853abef6a6163e6eeb8e08d8e09625cb5777f02af2e815fe34cde542",
+          "apps/web/index.html": "f49e82196a899a7d140a1aae680c5bce0736137bae35561360604c224fab252b",
+          "apps/web/package.json": "67c3c526c0fedfc043a9a8d8225c1dbf1a798a4a30305c8a653cd4bdc7f4fc54",
+          "apps/web/src/app/main.tsx": "09171a30686eef69b9c74bcb398102e38c2584c7d2392691fcf8dc1e785c61ba",
+          "apps/web/src/app/styles.css": "55b861919a8397a214d79fbae82d433c561d3dee18c361909a81f87d8a529195",
+          "apps/web/src/components/ui/button.test.tsx": "cbe29f88d769964c754a6e4c1a69c92de48267811a8b62e2ee4c28ee657f642f",
+          "apps/web/src/components/ui/button.tsx": "28e8bb4538f20e73643037d451a4a198348c5b3c9a75f000d7597a4e95fbaff2",
+          "apps/web/src/features/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/web/src/features/README.md": "248f8c4ebae741d9c34d44e138184b774b3daddc1317aaac88484cf745a3e949",
+          "apps/web/src/features/auth-workspace.tsx": "319c632b486eb8e1afe569afd75b447fadf9349cb9aeb6c364d2c45691cb56ed",
+          "apps/web/src/features/jobs.tsx": "56bed4e6ac556e0df59514fcbc0f40da74baced179b678bdfab21260060ddce4",
+          "apps/web/src/hooks/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/web/src/hooks/README.md": "07d6492a1ba032c8ceacc488cb20baa715a214fabd61c7272977c11a5c884f51",
+          "apps/web/src/lib/utils.ts": "0c97f5ec0478867d5369a4369f811e1b779c7f2548f671ef252f1503a6392d9d",
+          "apps/web/src/routes/status.tsx": "f6af6b55f9e031c51a0fd3b1f5197712412809891a3a28ddff72959d1a8756ae",
+          "apps/web/src/services/api.test.ts": "86c50bff12ba2402a6b378d129d92f3d693e0a31b21acb2baebe0a3325e06e5a",
+          "apps/web/src/services/api.ts": "f96d77c30483c38515785f1948cfdea31ff4ad0b5d4ce291acc5759abb3ef43e",
+          "apps/web/src/services/authorization-cache.ts": "55126b0281d8fc0963a41c32657a0a312fb732a9acc4bf78fe2119d9741b35bc",
+          "apps/web/src/services/authorization.ts": "d6cc9631854b00c8a6dd4da677763288d5be1b1a3bbc820bc3cf4d7d900eb84b",
+          "apps/web/src/services/health.ts": "8253ccc1d154bf570604799076620bf6e4968afc89a268636845be893d71fdae",
+          "apps/web/src/types/.gitkeep": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+          "apps/web/src/types/README.md": "f98dcb7e3b37ea5de4d0ee9b7b67f5dae3f94ba0eecd7df015459dc4722fe04e",
+          "apps/web/tsconfig.json": "024a28b6b968617fd148ac10c64b796106390ac25cf418596fadbeeeeca41853",
+          "apps/web/vite.config.ts": "b86fe48ba51fc336bb10ee2fb9d8fb2f2e446c7d9ddc0fc75392f23382920369",
+          "apps/worker/Dockerfile": "64385c79e19b7b120234f476c172e0fbd31a91fbbdd07d7dbf54bb75365a0302",
+          "apps/worker/package.json": "9ff96696e07ea8a0437dbfcfae514e1c0fc120250aa199848e4b5bd4a01d237f",
+          "apps/worker/src/main.ts": "3b45e00d09413b2dad3453bf3dcd69ba956296836b4726530b2a431f331d4e48",
+          "apps/worker/src/processors/smoke.ts": "310292c5408762b09b28fffc3fe2d12c05030565251178e35f55d75eddad007e",
+          "apps/worker/src/queues/smoke.ts": "c6d2ec83bc34e98032a88047a02f478e14a139a175a3f77e39a616011d7e8edd",
+          "apps/worker/src/smoke.ts": "d4d5779c3080b3704716e244a8c798448a15679096058fc0d1712935c84f58ca",
+          "apps/worker/tsconfig.json": "5605592dd3b3a46c56b11efda925539e5d5f85a7340c3a317def3861398e0f79",
+          "package.json": "9b6183b76117a5c2b55ec88790fbe6adf1ea92c01c7ee9ae184add9c2966f188",
+          "packages/ai-contracts/package.json": "f503658df046d4ce71c2f0c44c5466db0e17643140d7de54e3f5737080b51fc4",
+          "packages/ai-contracts/src/drafting.ts": "1791f58239ece2a1be1129ce04a0d537447a727711fb2f895cfcf56678337208",
+          "packages/ai-contracts/src/index.ts": "ad8bbec8a47cb0782c334867df917954e1fca3c28944f225e7654a5dacf58400",
+          "packages/ai-contracts/tsconfig.json": "9bed61ee71eef1e5523a79b9a25b364ae18590d9e5e6eef052d2eb06b0036b6e",
+          "packages/config/package.json": "2246b2f07828162c54853d2f14419e4362cb73810eb75552295dc63fa4285f7a",
+          "packages/config/src/index.ts": "0bbacc00196a24bf3ae9eff10272af5e9f5951e41afc7cdda94cf82697073ad6",
+          "packages/config/tsconfig.json": "9bed61ee71eef1e5523a79b9a25b364ae18590d9e5e6eef052d2eb06b0036b6e",
+          "packages/shared/package.json": "dccca9e9efda27d3f59a29a14cfe6bcac529c6016b17d0e5d7714bbb74407282",
+          "packages/shared/src/index.ts": "f0c671d55185bf20f5bc3020f4a32a07ff54425c1f2fdc7d035451fc831d1a36",
+          "packages/shared/tsconfig.json": "9bed61ee71eef1e5523a79b9a25b364ae18590d9e5e6eef052d2eb06b0036b6e",
+          "pnpm-lock.yaml": "0af8bb634bf886bfb34f4a234244046f5580d21e68b3b480ac262f4fb12db8cd",
+          "pnpm-workspace.yaml": "c1e55925f54965d55e5d3673caaeef417aa8380f1bacc87e023c1dee34fe778d",
+          "tsconfig.base.json": "9337459a438796beff2781fcf2d5083cf795f1057d9b5030ed864dc076e872c7"
+        },
+        "image": "sha256:80e6876ee9c2e800115bfdee11f61440e36196addb0c639e55fd6c7548b48ddc"
+      },
+      "exitCode": 0,
+      "command": "node scripts/openrouter-verification/broker-build.mjs",
+      "contextFiles": [
+        "broker.mjs",
+        "broker-policy.mjs",
+        "limit.mjs",
+        "ipc-transport.mjs",
+        "provider-substitute.mjs",
+        "fixture.mjs",
+        "broker-workflow.mjs",
+        "broker-client.mjs",
+        "broker-build.json",
+        "Dockerfile"
+      ]
+    },
+    "checks": [
+      {
+        "name": "01 missing approval",
+        "status": "PASS",
+        "providerPosts": 0
+      },
+      {
+        "name": "02 modified approval signature",
+        "status": "PASS",
+        "providerPosts": 0
+      },
+      {
+        "name": "03 expired approval",
+        "status": "PASS",
+        "providerPosts": 0
+      },
+      {
+        "name": "04 wrong execution purpose",
+        "status": "PASS",
+        "providerPosts": 0
+      },
+      {
+        "name": "05 changed source/image identity",
+        "status": "PASS",
+        "providerPosts": 0
+      },
+      {
+        "name": "05b changed image identity alone",
+        "status": "PASS",
+        "providerPosts": 0
+      },
+      {
+        "name": "06 changed approved route/model",
+        "status": "PASS",
+        "providerPosts": 0
+      },
+      {
+        "name": "14 missing ledger",
+        "status": "PASS",
+        "providerPosts": 0
+      },
+      {
+        "name": "15 corrupted ledger",
+        "status": "PASS",
+        "providerPosts": 0
+      },
+      {
+        "name": "07 wrong operation",
+        "status": "PASS",
+        "providerPosts": 0,
+        "admissions": 0
+      },
+      {
+        "name": "08 wrong task",
+        "status": "PASS",
+        "providerPosts": 0,
+        "admissions": 0
+      },
+      {
+        "name": "21 arbitrary destination",
+        "status": "PASS",
+        "providerPosts": 0,
+        "admissions": 0
+      },
+      {
+        "name": "22 catalog endpoint",
+        "status": "PASS",
+        "providerPosts": 0,
+        "admissions": 0
+      },
+      {
+        "name": "23 generic proxy request",
+        "status": "PASS",
+        "providerPosts": 0,
+        "admissions": 0
+      },
+      {
+        "name": "approved workload identity",
+        "status": "PASS",
+        "providerPosts": 0,
+        "admissions": 0
+      },
+      {
+        "name": "approved request schema",
+        "status": "PASS",
+        "providerPosts": 0,
+        "admissions": 0
+      },
+      {
+        "name": "token limit",
+        "status": "PASS",
+        "providerPosts": 0,
+        "admissions": 0
+      },
+      {
+        "name": "request provider/model pin",
+        "status": "PASS",
+        "providerPosts": 0,
+        "admissions": 0
+      },
+      {
+        "name": "12 run name cannot expand authorization",
+        "status": "PASS",
+        "providerPosts": 0,
+        "admissions": 0
+      },
+      {
+        "name": "09 duplicate operation",
+        "status": "PASS",
+        "providerPosts": 1
+      },
+      {
+        "name": "10 duplicate task",
+        "status": "PASS",
+        "providerPosts": 1
+      },
+      {
+        "name": "11 third request",
+        "status": "PASS",
+        "providerPosts": 2,
+        "admissions": 2
+      },
+      {
+        "name": "13 broker restart preserves consumption",
+        "status": "PASS",
+        "providerPosts": 2,
+        "admissions": 2
+      },
+      {
+        "name": "16 read-only ledger",
+        "status": "PASS",
+        "providerPosts": 0
+      },
+      {
+        "name": "17 timeout",
+        "status": "PASS",
+        "providerPosts": 1,
+        "admissions": 1,
+        "redirectedRequests": 0,
+        "billing": "UNKNOWN"
+      },
+      {
+        "name": "18 connection interruption",
+        "status": "PASS",
+        "providerPosts": 1,
+        "admissions": 1,
+        "redirectedRequests": 0,
+        "billing": "UNKNOWN"
+      },
+      {
+        "name": "20 redirect",
+        "status": "PASS",
+        "providerPosts": 1,
+        "admissions": 1,
+        "redirectedRequests": 0,
+        "billing": "UNKNOWN"
+      },
+      {
+        "name": "provider secret echo rejected",
+        "status": "PASS",
+        "providerPosts": 1,
+        "admissions": 1,
+        "redirectedRequests": 0,
+        "billing": "UNKNOWN"
+      },
+      {
+        "name": "19 broker crash after admission",
+        "status": "PASS",
+        "providerPosts": 1,
+        "admissions": 1,
+        "billing": "UNKNOWN"
+      },
+      {
+        "name": "28 concurrent requests",
+        "status": "PASS",
+        "contenders": 12,
+        "providerPosts": 2,
+        "admissions": 2
+      },
+      {
+        "name": "GA-F01 literal",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 unicode",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 nested-json",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 split-escapes",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 array",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 object",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 structured-text",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 error-content",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 malformed-outer",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 malformed-nested",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 unexpected-envelope",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "GA-F01 oversized",
+        "status": "PASS",
+        "admissions": 1,
+        "providerPosts": 1,
+        "ipcPayload": "generic rejection"
+      },
+      {
+        "name": "24 application direct provider and other networks blocked",
+        "status": "PASS",
+        "probes": [
+          {
+            "name": "provider",
+            "reachable": false
+          },
+          {
+            "name": "canary on other network",
+            "reachable": false
+          },
+          {
+            "name": "normal database",
+            "reachable": false
+          },
+          {
+            "name": "normal worker",
+            "reachable": false
+          }
+        ]
+      },
+      {
+        "name": "25 normal API/worker cannot access broker mounts",
+        "status": "PASS"
+      },
+      {
+        "name": "GA-F01 artifact rejection literal",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection unicode",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection nested-json",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection split-escapes",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection array",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection object",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection structured-text",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection error-content",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection malformed-outer",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection malformed-nested",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection unexpected-envelope",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "GA-F01 artifact rejection oversized",
+        "status": "PASS",
+        "artifacts": 0,
+        "admissions": 1
+      },
+      {
+        "name": "26 application environment and child processes contain no credential",
+        "status": "PASS"
+      },
+      {
+        "name": "authenticated API -> production processor -> broker -> persistence",
+        "status": "PASS",
+        "providerPosts": 2
+      },
+      {
+        "name": "29 incomplete reconciliation fails",
+        "status": "PASS"
+      },
+      {
+        "name": "27 credential absent from database/logs/evidence/image layers",
+        "status": "PASS",
+        "imageScan": {
+          "members": 17,
+          "compressedMembers": 12,
+          "credentialMatches": 0
+        }
+      },
+      {
+        "name": "30 legacy smoke disabled",
+        "status": "PASS"
+      }
+    ],
+    "commands": [],
+    "providerRequests": "synthetic only",
+    "liveRequests": 0,
+    "fixtureAuthorization": {
+      "version": 1,
+      "purpose": "gate-a-synthetic",
+      "authorizationId": "6e3afbfe-87b4-41c5-8cfb-5bc7c44a2c0a",
+      "installationId": "c624c39d-17a7-4b3a-86ad-cbdb75a56ead",
+      "sourceDigest": "540562f7d703c2bbdef69e429a8b70ed44e853b67b547ae57d8a2afeaa295029",
+      "brokerImage": "sha256:4c69ceec7ce29fd483bc8b395d8efa85982f002608c8aa1db0256c62f1864d8d",
+      "applicationImage": "sha256:80e6876ee9c2e800115bfdee11f61440e36196addb0c639e55fd6c7548b48ddc",
+      "model": "verification/synthetic",
+      "provider": "Synthetic",
+      "endpoint": "http://provider:8081/api/v1/chat/completions",
+      "issuedAt": "2026-11-05T02:58:06.944Z",
+      "expiresAt": "2026-11-05T03:28:07.944Z",
+      "maxOutputTokens": 4096,
+      "maxRequestBytes": 65536,
+      "tasks": [
+        {
+          "task": "job-analysis",
+          "operationId": "d4a187f4-cc09-4c60-b156-fd28061b269d",
+          "workloadHash": "f8217fe23adc8993155f4678d5cdf910301a127358f3cd7a7534109b90f8fbc1"
+        },
+        {
+          "task": "rubric-draft",
+          "operationId": "b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+          "workloadHash": "c62d5a4a9cdd03445a769c105b9ca2835634360dfc88642ae2ff2f7d27e50720"
+        }
+      ]
+    },
+    "networkProbes": [
+      {
+        "name": "provider",
+        "reachable": false
+      },
+      {
+        "name": "canary on other network",
+        "reachable": false
+      },
+      {
+        "name": "normal database",
+        "reachable": false
+      },
+      {
+        "name": "normal worker",
+        "reachable": false
+      }
+    ],
+    "workflow": {
+      "status": "PASS",
+      "stage": "workflow",
+      "records": [
+        {
+          "task": "job-analysis",
+          "operationId": "d4a187f4-cc09-4c60-b156-fd28061b269d",
+          "aiRequestId": "a84c7eeb-d24f-434a-9a08-ab902ece34d4",
+          "attempt": 1,
+          "providerGenerationId": "gen-d4a187f4-cc09-4c60-b156-fd28061b269d",
+          "model": "verification/synthetic",
+          "provider": "Synthetic",
+          "inputTokens": 100,
+          "outputTokens": 50,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 5,
+          "applicationRecordedCost": "0.001",
+          "settled": true,
+          "costStatus": "ACTUAL"
+        },
+        {
+          "task": "rubric-draft",
+          "operationId": "b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+          "aiRequestId": "c09b1037-b04c-433b-a85f-5681e764a2a2",
+          "attempt": 1,
+          "providerGenerationId": "gen-b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+          "model": "verification/synthetic",
+          "provider": "Synthetic",
+          "inputTokens": 100,
+          "outputTokens": 50,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 5,
+          "applicationRecordedCost": "0.001",
+          "settled": true,
+          "costStatus": "ACTUAL"
+        }
+      ],
+      "requestBindings": [
+        {
+          "operationId": "b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+          "task": "rubric-draft",
+          "aiRequestId": "c09b1037-b04c-433b-a85f-5681e764a2a2"
+        },
+        {
+          "operationId": "d4a187f4-cc09-4c60-b156-fd28061b269d",
+          "task": "job-analysis",
+          "aiRequestId": "a84c7eeb-d24f-434a-9a08-ab902ece34d4"
+        }
+      ],
+      "credentialEnvironmentAbsent": true,
+      "credentialMountAbsent": true,
+      "ledgerMountAbsent": true,
+      "childCredentialAbsent": true,
+      "tenantDenied": true,
+      "productionProcessor": true
+    },
+    "expectedInventory": [
+      {
+        "task": "job-analysis",
+        "operationId": "d4a187f4-cc09-4c60-b156-fd28061b269d",
+        "aiRequestId": "a84c7eeb-d24f-434a-9a08-ab902ece34d4",
+        "providerGenerationId": "gen-d4a187f4-cc09-4c60-b156-fd28061b269d"
+      },
+      {
+        "task": "rubric-draft",
+        "operationId": "b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+        "aiRequestId": "c09b1037-b04c-433b-a85f-5681e764a2a2",
+        "providerGenerationId": "gen-b3f0dc55-5483-41ae-9f67-e0774c2ff244"
+      }
+    ],
+    "providerReceipts": [
+      {
+        "operationId": "d4a187f4-cc09-4c60-b156-fd28061b269d",
+        "task": "job-analysis",
+        "providerGenerationId": "gen-d4a187f4-cc09-4c60-b156-fd28061b269d",
+        "provider": "Synthetic",
+        "model": "verification/synthetic",
+        "inputTokens": 100,
+        "outputTokens": 50,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 5,
+        "providerReportedCost": "0.00100000"
+      },
+      {
+        "operationId": "b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+        "task": "rubric-draft",
+        "providerGenerationId": "gen-b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+        "provider": "Synthetic",
+        "model": "verification/synthetic",
+        "inputTokens": 100,
+        "outputTokens": 50,
+        "cacheReadTokens": 0,
+        "cacheWriteTokens": 5,
+        "providerReportedCost": "0.00100000"
+      }
+    ],
+    "reconciliation": {
+      "status": "PASS",
+      "provenance": "synthetic-independent-fixture",
+      "provenanceVerified": false,
+      "inventory": [
+        {
+          "operationId": "d4a187f4-cc09-4c60-b156-fd28061b269d",
+          "aiRequestId": "a84c7eeb-d24f-434a-9a08-ab902ece34d4",
+          "task": "job-analysis",
+          "providerGenerationId": "gen-d4a187f4-cc09-4c60-b156-fd28061b269d",
+          "status": "MATCH",
+          "problems": []
+        },
+        {
+          "operationId": "b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+          "aiRequestId": "c09b1037-b04c-433b-a85f-5681e764a2a2",
+          "task": "rubric-draft",
+          "providerGenerationId": "gen-b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+          "status": "MATCH",
+          "problems": []
+        }
+      ],
+      "unexpectedApplication": [],
+      "unexpectedProvider": [],
+      "comparisons": [
+        {
+          "operationId": "d4a187f4-cc09-4c60-b156-fd28061b269d",
+          "aiRequestId": "a84c7eeb-d24f-434a-9a08-ab902ece34d4",
+          "attempt": 1,
+          "task": "job-analysis",
+          "providerGenerationId": "gen-d4a187f4-cc09-4c60-b156-fd28061b269d",
+          "provider": "Synthetic",
+          "model": "verification/synthetic",
+          "inputTokens": 100,
+          "outputTokens": 50,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 5,
+          "applicationRecordedCost": "0.00100000",
+          "settled": true,
+          "costStatus": "ACTUAL",
+          "usageMetadataStatus": null,
+          "outcome": null,
+          "providerReportedCost": "0.00100000",
+          "reconciliation": "MATCH",
+          "differences": []
+        },
+        {
+          "operationId": "b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+          "aiRequestId": "c09b1037-b04c-433b-a85f-5681e764a2a2",
+          "attempt": 1,
+          "task": "rubric-draft",
+          "providerGenerationId": "gen-b3f0dc55-5483-41ae-9f67-e0774c2ff244",
+          "provider": "Synthetic",
+          "model": "verification/synthetic",
+          "inputTokens": 100,
+          "outputTokens": 50,
+          "cacheReadTokens": 0,
+          "cacheWriteTokens": 5,
+          "applicationRecordedCost": "0.00100000",
+          "settled": true,
+          "costStatus": "ACTUAL",
+          "usageMetadataStatus": null,
+          "outcome": null,
+          "providerReportedCost": "0.00100000",
+          "reconciliation": "MATCH",
+          "differences": []
+        }
+      ],
+      "applicationTotal": {
+        "knownCost": "0.00200000",
+        "unknownCosts": 0,
+        "missingExpectedRows": 0
+      },
+      "providerTotal": {
+        "knownCost": "0.00200000",
+        "unknownCosts": 0,
+        "missingExpectedRows": 0
+      },
+      "unmatchedProviderRecords": 0
+    },
+    "containers": [
+      {
+        "name": "/gab-bc4f42db-8870-45f6-804a-7abad444550d-b-6e3afbfe-87b4-41c5-8cfb-5bc7c44a2c0a",
+        "image": "sha256:4c69ceec7ce29fd483bc8b395d8efa85982f002608c8aa1db0256c62f1864d8d",
+        "networkMode": "gab-bc4f42db-8870-45f6-804a-7abad444550d-provider",
+        "networks": [
+          "gab-bc4f42db-8870-45f6-804a-7abad444550d-provider"
+        ],
+        "privileged": false,
+        "capDrop": [
+          "ALL"
+        ],
+        "securityOpt": [
+          "no-new-privileges:true"
+        ],
+        "readOnlyRoot": true,
+        "portBindings": {},
+        "mounts": [
+          {
+            "destination": "/trust",
+            "rw": false,
+            "type": "bind"
+          },
+          {
+            "destination": "/run/secrets",
+            "rw": false,
+            "type": "bind"
+          },
+          {
+            "destination": "/ipc",
+            "rw": true,
+            "type": "bind"
+          },
+          {
+            "destination": "/authorization",
+            "rw": true,
+            "type": "bind"
+          },
+          {
+            "destination": "/approval",
+            "rw": false,
+            "type": "bind"
+          }
+        ]
+      },
+      {
+        "name": "/gab-bc4f42db-8870-45f6-804a-7abad444550d-c-6e3afbfe-87b4-41c5-8cfb-5bc7c44a2c0a",
+        "image": "sha256:80e6876ee9c2e800115bfdee11f61440e36196addb0c639e55fd6c7548b48ddc",
+        "networkMode": "gab-bc4f42db-8870-45f6-804a-7abad444550d-data",
+        "networks": [
+          "gab-bc4f42db-8870-45f6-804a-7abad444550d-data"
+        ],
+        "privileged": false,
+        "capDrop": [
+          "ALL"
+        ],
+        "securityOpt": [
+          "no-new-privileges:true"
+        ],
+        "readOnlyRoot": true,
+        "portBindings": {},
+        "mounts": [
+          {
+            "destination": "/verification",
+            "rw": false,
+            "type": "bind"
+          },
+          {
+            "destination": "/ipc",
+            "rw": false,
+            "type": "bind"
+          }
+        ]
+      },
+      {
+        "name": "/gab-bc4f42db-8870-45f6-804a-7abad444550d-workflow",
+        "image": "sha256:80e6876ee9c2e800115bfdee11f61440e36196addb0c639e55fd6c7548b48ddc",
+        "networkMode": "gab-bc4f42db-8870-45f6-804a-7abad444550d-data",
+        "networks": [
+          "gab-bc4f42db-8870-45f6-804a-7abad444550d-data"
+        ],
+        "privileged": false,
+        "capDrop": [
+          "ALL"
+        ],
+        "securityOpt": [
+          "no-new-privileges:true"
+        ],
+        "readOnlyRoot": true,
+        "portBindings": {},
+        "mounts": [
+          {
+            "destination": "/verification",
+            "rw": false,
+            "type": "bind"
+          },
+          {
+            "destination": "/ipc",
+            "rw": false,
+            "type": "bind"
+          },
+          {
+            "destination": "/workload",
+            "rw": false,
+            "type": "bind"
+          }
+        ]
+      },
+      {
+        "name": "/gab-bc4f42db-8870-45f6-804a-7abad444550d-provider",
+        "image": "sha256:4c69ceec7ce29fd483bc8b395d8efa85982f002608c8aa1db0256c62f1864d8d",
+        "networkMode": "gab-bc4f42db-8870-45f6-804a-7abad444550d-provider",
+        "networks": [
+          "gab-bc4f42db-8870-45f6-804a-7abad444550d-provider"
+        ],
+        "privileged": false,
+        "capDrop": [
+          "ALL"
+        ],
+        "securityOpt": [
+          "no-new-privileges:true"
+        ],
+        "readOnlyRoot": true,
+        "portBindings": {},
+        "mounts": [
+          {
+            "destination": "/control",
+            "rw": false,
+            "type": "bind"
+          }
+        ]
+      }
+    ],
+    "imageScan": {
+      "members": 17,
+      "compressedMembers": 12,
+      "credentialMatches": 0
+    },
+    "status": "PASS",
+    "finishedAt": "2026-11-05T02:59:00.053Z"
+  },
+  "commands": [
+    {
+      "command": "pnpm lint",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0
+    },
+    {
+      "command": "GATE_A_DOCKER_TESTS=1 pnpm exec vitest run tests/openrouter --reporter=json --outputFile=.verification/openrouter/targeted-checks/focused.json",
+      "exitCode": 1
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm typecheck",
+      "exitCode": 0
+    },
+    {
+      "command": "pnpm build",
+      "exitCode": 0
+    },
+    {
+      "command": "GATE_A_DOCKER_TESTS=1 pnpm exec vitest run tests/openrouter --reporter=json --outputFile=.verification/openrouter/targeted-checks/focused-final.json",
+      "exitCode": 0
+    },
+    {
+      "command": "AI_PROVIDER=mock pnpm exec vitest run --reporter=json --outputFile=.verification/openrouter/targeted-checks/default.json",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/openrouter-verification/broker-build.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/openrouter-verification/broker-verify.mjs",
+      "exitCode": 1
+    },
+    {
+      "command": "pnpm lint",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/openrouter-verification/broker-build.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/openrouter-verification/broker-verify.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/openrouter-verification/regressions.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --check",
+      "exitCode": 0
+    },
+    {
+      "command": "node scripts/openrouter-verification/build.mjs",
+      "exitCode": 0
+    },
+    {
+      "command": "git diff --exit-code HEAD -- apps packages docs/MASTER_SPEC.md docs/implementation-plan.md docs/PHASE_0.md pnpm-lock.yaml",
+      "exitCode": 0
+    },
+    {
+      "command": "git check-ignore .verification/openrouter/targeted-checks/runtime-commands.json",
+      "exitCode": 0
+    },
+    {
+      "command": "docker ps -a --filter name=gab- --format {{.Names}}",
+      "exitCode": 0,
+      "remainingContainers": 0
+    }
+  ],
+  "focused": {
+    "numPassedTests": 96,
+    "numFailedTests": 0,
+    "numPendingTests": 0
+  },
+  "default": {
+    "numPassedTests": 137,
+    "numFailedTests": 0,
+    "numPendingTests": 5
+  },
+  "testCases": [
+    {
+      "name": "broker fixed paths and signed synthetic approval allow the exact compiled contract",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed purpose",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed endpoint",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed model",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed provider",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed installationId",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed authorizationId",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed sourceDigest",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed brokerImage",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed applicationImage",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed maxOutputTokens",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies signed changed maxRequestBytes",
+      "status": "passed"
+    },
+    {
+      "name": "broker denies missing, forged, modified, expired and future-dated approvals",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request operation",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request task",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request url",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request proxy",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request run name",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request model",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request provider",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request fallback",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request token limit",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request fractional tokens",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request stream",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request schema",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request system",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request workload",
+      "status": "passed"
+    },
+    {
+      "name": "broker rejects unapproved request tool",
+      "status": "passed"
+    },
+    {
+      "name": "GA-01/04 concurrent authorization initialization admits exactly one initializer",
+      "status": "passed"
+    },
+    {
+      "name": "GA-01 alternate run names share exactly two admissions across concurrent restarted processes",
+      "status": "passed"
+    },
+    {
+      "name": "GA-01 commit precedes callback; failed and ambiguous sends never refund",
+      "status": "passed"
+    },
+    {
+      "name": "GA-01 mismatched identity, missing state and corruption fail closed",
+      "status": "passed"
+    },
+    {
+      "name": "GA-04 actual permission denied writes and inaccessible path fail before send",
+      "status": "passed"
+    },
+    {
+      "name": "GA-04 real SQLite COMMIT failure rolls back and never calls transport",
+      "status": "passed"
+    },
+    {
+      "name": "GA-04 actual read-only Docker mount rejects SQLite writes",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects both empty",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects empty application",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects empty provider",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects truncated application",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects truncated provider",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects duplicate application",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects duplicate provider",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects missing generation",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects unknown cost",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects unknown tokens",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects mismatched cost",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects wrong task",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects unexpected application",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 rejects unexpected provider",
+      "status": "passed"
+    },
+    {
+      "name": "GA-03 requires both planned operations and complete inventory; CLI rejects empty arrays",
+      "status": "passed"
+    },
+    {
+      "name": "GA-02 smoke and reserved live entry are disabled before gateway or credentials can be read",
+      "status": "passed"
+    },
+    {
+      "name": "GA-01 live authorization cannot be provisioned in run-selected or synthetic roots",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response literal",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response unicode",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response nested-json",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response split-escapes",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response array",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response object",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response structured-text",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response error-content",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response malformed-outer",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response malformed-nested",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response unexpected-envelope",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response oversized",
+      "status": "passed"
+    },
+    {
+      "name": "decoded provider response valid",
+      "status": "passed"
+    },
+    {
+      "name": "unknown response usage remains absent",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation valid signed inventory",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation modified analysis operation",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation modified rubric operation",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation swapped operation IDs",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation missing analysis",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation missing rubric",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation duplicate operation",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation unexpected third operation",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation modified request ID",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation swapped request IDs",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation missing generation",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation modified generation",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation duplicate generation",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation empty application",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation empty provider",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation both empty",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation truncated evidence",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation invalid signature",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation expired approval",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation approval application mismatch",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation unknown cost",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation unknown usage",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation request binding mismatch",
+      "status": "passed"
+    },
+    {
+      "name": "signed reconciliation generation receipt mismatch",
+      "status": "passed"
+    },
+    {
+      "name": "atomic two-send ceiling across concurrent processes, reopen and ordinary reinitialization",
+      "status": "passed"
+    },
+    {
+      "name": "failed sends consume before transport, retries denied and missing/corrupt stores fail closed",
+      "status": "passed"
+    },
+    {
+      "name": "accounting preserves unknowns, reports discrepancies and allowlists evidence",
+      "status": "passed"
+    },
+    {
+      "name": "designated provider verification refuses mock and arbitrary credential configuration",
+      "status": "passed"
+    },
+    {
+      "name": "counter update failure fails closed before transport",
+      "status": "passed"
+    },
+    {
+      "name": "a separately started process sees the first committed send and only the remaining slot",
+      "status": "passed"
+    }
+  ],
+  "regressions": {
+    "project": "ga-regression-7915a756-f04f-4d12-97f3-cfcaac9d50da",
+    "image": "sha256:80e6876ee9c2e800115bfdee11f61440e36196addb0c639e55fd6c7548b48ddc",
+    "internalNetwork": true,
+    "publishedPorts": false,
+    "commands": [
+      {
+        "command": "docker compose up -d --wait postgres redis mailpit",
+        "exitCode": 0
+      },
+      {
+        "command": "docker compose ps -q",
+        "exitCode": 0
+      },
+      {
+        "command": "docker inspect 906fadc21880c98f4a8f23bf78d2e3919b05df0095f6c25e1481208d1bb58798 ddf9b546cf65910568acb989b7a6c180e577ed9b883cc34ee0f0d327a4246853 33d4b553256dc978ae4bbaef77ea922b2e6c1b689cb8ddcdab85a70682b9239d",
+        "exitCode": 0
+      },
+      {
+        "command": "pnpm exec vitest run tests/phase2 --reporter=json --outputFile=/home/instance0/projects/smart-recruit-ai/.verification/openrouter/regressions/phase2.json",
+        "exitCode": 0
+      },
+      {
+        "command": "pnpm exec vitest run tests/phase3 --reporter=json --outputFile=/home/instance0/projects/smart-recruit-ai/.verification/openrouter/regressions/phase3.json",
+        "exitCode": 0
+      }
+    ],
+    "containers": [
+      {
+        "name": "/ga-regression-7915a756-f04f-4d12-97f3-cfcaac9d50da-mailpit-1",
+        "image": "sha256:b1f1be18af530d939a11ee8820b379e0c88eeec204d904bfad68862adced3a5a",
+        "networks": [
+          "ga-regression-7915a756-f04f-4d12-97f3-cfcaac9d50da_default"
+        ],
+        "portBindings": {}
+      },
+      {
+        "name": "/ga-regression-7915a756-f04f-4d12-97f3-cfcaac9d50da-postgres-1",
+        "image": "sha256:bb377b7239d2774ac8cc76f481596ce96c5a6b5e9d141f6d0a0ee371a6e7c0f2",
+        "networks": [
+          "ga-regression-7915a756-f04f-4d12-97f3-cfcaac9d50da_default"
+        ],
+        "portBindings": {}
+      },
+      {
+        "name": "/ga-regression-7915a756-f04f-4d12-97f3-cfcaac9d50da-redis-1",
+        "image": "sha256:02f2cc4882f8bf87c79a220ac958f58c700bdec0dfb9b9ea61b62fb0e8f1bfcf",
+        "networks": [
+          "ga-regression-7915a756-f04f-4d12-97f3-cfcaac9d50da_default"
+        ],
+        "portBindings": {}
+      }
+    ],
+    "status": "PASS",
+    "phase2": {
+      "passed": 5,
+      "failed": 0,
+      "skipped": 0
+    },
+    "phase3": {
+      "passed": 13,
+      "failed": 0,
+      "skipped": 0
+    },
+    "cleanupExit": 0
+  },
+  "security": {
+    "protectedAndProductionDiffExit": 0,
+    "temporaryConfigurationIgnored": true,
+    "realCredentialsInspected": false,
+    "realProviderRequests": 0,
+    "existingDependencyAdvisoriesPreserved": true
+  },
+  "sourceHashes": {
+    "scripts/openrouter-verification/broker.mjs": "eb0bce2082216a84ad1928b7f081a8f666648d0839ba176aab0aa8a8e43713d3",
+    "scripts/openrouter-verification/broker-policy.mjs": "9bdfed85d679121132bb2e6defd36fedad7cd5bc6e1a5d0c92a88e91cf8dd98f",
+    "scripts/openrouter-verification/provider-substitute.mjs": "f45cb007b6809d20b13f4bfe3262b7a8634364564d6db5b3cbbb696ab910cd73",
+    "scripts/openrouter-verification/broker-verify.mjs": "61412e25f8d60d46745ece1f09d5ec89f499b33472b6941bebdc719d9c5e09e7",
+    "scripts/openrouter-verification/broker-workflow.mjs": "806f079b31bdff6062119ceb4f548cf506d2788a24451213aaec027716326231",
+    "scripts/openrouter-verification/fixture.mjs": "14dabb4c4e47f6bc7d3b5c9e2004c8f1974d95f84b55f7589ce694813d5b7159",
+    "scripts/openrouter-verification/evidence.mjs": "c67bbe1e9d039321393729874f92d2fcb710e5128ca211ae98c23caee20d5367",
+    "scripts/openrouter-verification/reconcile.mjs": "a5213637e63c37fcd5539ce1e2049be05e71775a877c163f2c21cc4a185d0c19",
+    "tests/openrouter/targeted-security.test.mjs": "76793e672e3b6e5de984d79f3815f765d47c4edf9a800a3d8f7746753b2b3d14",
+    "tests/openrouter/remediation.test.mjs": "5309aa0417abd51162558d427f33b9d3e3e5aeafe722f51337337b0e96124c28"
+  },
+  "history": "docs/audits/openrouter-gate-a-history/pre-f01-f02-evidence.json",
+  "knownLimitations": [
+    "Complete credential detection after outer and structured JSON decoding only; no claim against arbitrary encodings or transformations.",
+    "Owner signing/provisioning host, separate application request export and provider receipt provenance are trust assumptions.",
+    "Synthetic receipts do not establish independently verified provider billing.",
+    "Auditor Docker permissions remain unresolved; do not bypass permissions.",
+    "Processor is invoked directly after outbox check; no new full dispatcher proof.",
+    "No physical power-loss/fsync testing, browser suite or fresh dependency lookup."
+  ]
+}
